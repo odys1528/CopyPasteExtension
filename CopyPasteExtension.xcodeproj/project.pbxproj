@@ -1,0 +1,698 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		450C421F4C01F10DF2F8D359 /* Pods_CopyPasteExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84960EB6550371BC81EB8045 /* Pods_CopyPasteExtension.framework */; };
+		9574256EB4831F7897F366BD /* Pods_CopyPasteExtensionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE0561DBD4AEA7BEAB7DB1F /* Pods_CopyPasteExtensionTests.framework */; };
+		F2047FFF24B0DD78000381D7 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2047FFE24B0DD78000381D7 /* DataModel.swift */; };
+		F27F97F724C4C382001F904A /* MockNSTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27F97F624C4C382001F904A /* MockNSTableView.swift */; };
+		F27F97F924C4C544001F904A /* MockNSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27F97F824C4C544001F904A /* MockNSEvent.swift */; };
+		F27F97FA24C4C7E1001F904A /* CellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */; };
+		F284B7EB24B8DBA80014B7FA /* MenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F284B7EA24B8DBA80014B7FA /* MenuProvider.swift */; };
+		F2AE231C24C0A6EC00B3B698 /* MockUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE231B24C0A6EC00B3B698 /* MockUserDefaults.swift */; };
+		F2AE231D24C0CBFF00B3B698 /* ClipboardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D2790024AFCA3F00C0C63F /* ClipboardRepository.swift */; };
+		F2AE231E24C0D17500B3B698 /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D278FD24AFC5A700C0C63F /* AppPreferences.swift */; };
+		F2AE232024C208E600B3B698 /* UtilitySpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE231F24C208E600B3B698 /* UtilitySpec.swift */; };
+		F2AE232124C20A1E00B3B698 /* MenuProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F284B7EA24B8DBA80014B7FA /* MenuProvider.swift */; };
+		F2AE232524C2145900B3B698 /* ViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE232424C2145900B3B698 /* ViewControllerSpec.swift */; };
+		F2AE232624C214EF00B3B698 /* ClipboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D278D024AFB4C200C0C63F /* ClipboardViewController.swift */; };
+		F2AE232824C2159700B3B698 /* EventListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE232724C2159700B3B698 /* EventListenerProtocol.swift */; };
+		F2AE232924C2159700B3B698 /* EventListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE232724C2159700B3B698 /* EventListenerProtocol.swift */; };
+		F2AE232B24C2169400B3B698 /* MockEventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE232A24C2169400B3B698 /* MockEventListener.swift */; };
+		F2D0B58224BF7A750044A1A2 /* CellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */; };
+		F2D0B58424BF7BCE0044A1A2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */; };
+		F2D278CF24AFB4C200C0C63F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D278CE24AFB4C200C0C63F /* AppDelegate.swift */; };
+		F2D278D124AFB4C200C0C63F /* ClipboardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D278D024AFB4C200C0C63F /* ClipboardViewController.swift */; };
+		F2D278D324AFB4C300C0C63F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2D278D224AFB4C300C0C63F /* Assets.xcassets */; };
+		F2D278D624AFB4C300C0C63F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2D278D424AFB4C300C0C63F /* Main.storyboard */; };
+		F2D278FE24AFC5A700C0C63F /* AppPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D278FD24AFC5A700C0C63F /* AppPreferences.swift */; };
+		F2D2790124AFCA3F00C0C63F /* ClipboardRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D2790024AFCA3F00C0C63F /* ClipboardRepository.swift */; };
+		F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2047FFE24B0DD78000381D7 /* DataModel.swift */; };
+		F2D86E6E24BF8E3400A2E6C6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */; };
+		F2D86E7024BF9EA400A2E6C6 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */; };
+		F2FFC13124C5F5A2006D19DE /* MockStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FFC13024C5F5A2006D19DE /* MockStatus.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F2D278DE24AFB4C300C0C63F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F2D278C324AFB4C200C0C63F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F2D278CA24AFB4C200C0C63F;
+			remoteInfo = CopyPasteExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		F2D278FC24AFB5D200C0C63F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0C080CE3997E844933DEDB7A /* Pods-CopyPasteExtension.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CopyPasteExtension.debug.xcconfig"; path = "Target Support Files/Pods-CopyPasteExtension/Pods-CopyPasteExtension.debug.xcconfig"; sourceTree = "<group>"; };
+		20323F3BAFBD32694CA29AA3 /* Pods-CopyPasteExtensionTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CopyPasteExtensionTests.debug.xcconfig"; path = "Target Support Files/Pods-CopyPasteExtensionTests/Pods-CopyPasteExtensionTests.debug.xcconfig"; sourceTree = "<group>"; };
+		32C64C5EAC268C3EDB5E0EFD /* Pods-CopyPasteExtensionTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CopyPasteExtensionTests.release.xcconfig"; path = "Target Support Files/Pods-CopyPasteExtensionTests/Pods-CopyPasteExtensionTests.release.xcconfig"; sourceTree = "<group>"; };
+		50515BF9EFD0C45151252B05 /* Pods-CopyPasteExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CopyPasteExtension.release.xcconfig"; path = "Target Support Files/Pods-CopyPasteExtension/Pods-CopyPasteExtension.release.xcconfig"; sourceTree = "<group>"; };
+		84960EB6550371BC81EB8045 /* Pods_CopyPasteExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CopyPasteExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ECE0561DBD4AEA7BEAB7DB1F /* Pods_CopyPasteExtensionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CopyPasteExtensionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2047FFE24B0DD78000381D7 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		F27F97F624C4C382001F904A /* MockNSTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNSTableView.swift; sourceTree = "<group>"; };
+		F27F97F824C4C544001F904A /* MockNSEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNSEvent.swift; sourceTree = "<group>"; };
+		F284B7EA24B8DBA80014B7FA /* MenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuProvider.swift; sourceTree = "<group>"; };
+		F2AE231B24C0A6EC00B3B698 /* MockUserDefaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockUserDefaults.swift; sourceTree = "<group>"; };
+		F2AE231F24C208E600B3B698 /* UtilitySpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilitySpec.swift; sourceTree = "<group>"; };
+		F2AE232424C2145900B3B698 /* ViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSpec.swift; sourceTree = "<group>"; };
+		F2AE232724C2159700B3B698 /* EventListenerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListenerProtocol.swift; sourceTree = "<group>"; };
+		F2AE232A24C2169400B3B698 /* MockEventListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEventListener.swift; sourceTree = "<group>"; };
+		F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifier.swift; sourceTree = "<group>"; };
+		F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F2D278CB24AFB4C200C0C63F /* CopyPasteExtension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyPasteExtension.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2D278CE24AFB4C200C0C63F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F2D278D024AFB4C200C0C63F /* ClipboardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardViewController.swift; sourceTree = "<group>"; };
+		F2D278D224AFB4C300C0C63F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F2D278D524AFB4C300C0C63F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F2D278D724AFB4C300C0C63F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2D278D824AFB4C300C0C63F /* CopyPasteExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = CopyPasteExtension.entitlements; sourceTree = "<group>"; };
+		F2D278DD24AFB4C300C0C63F /* CopyPasteExtensionTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CopyPasteExtensionTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F2D278E324AFB4C300C0C63F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F2D278FD24AFC5A700C0C63F /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
+		F2D2790024AFCA3F00C0C63F /* ClipboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardRepository.swift; sourceTree = "<group>"; };
+		F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
+		F2FFC13024C5F5A2006D19DE /* MockStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStatus.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F2D278C824AFB4C200C0C63F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				450C421F4C01F10DF2F8D359 /* Pods_CopyPasteExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2D278DA24AFB4C300C0C63F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				9574256EB4831F7897F366BD /* Pods_CopyPasteExtensionTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		58B447F7B295EF6C1CA2DACB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				84960EB6550371BC81EB8045 /* Pods_CopyPasteExtension.framework */,
+				ECE0561DBD4AEA7BEAB7DB1F /* Pods_CopyPasteExtensionTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6D025E3CD1839A1901050804 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0C080CE3997E844933DEDB7A /* Pods-CopyPasteExtension.debug.xcconfig */,
+				50515BF9EFD0C45151252B05 /* Pods-CopyPasteExtension.release.xcconfig */,
+				20323F3BAFBD32694CA29AA3 /* Pods-CopyPasteExtensionTests.debug.xcconfig */,
+				32C64C5EAC268C3EDB5E0EFD /* Pods-CopyPasteExtensionTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		F2AE232C24C2174900B3B698 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				F2AE231B24C0A6EC00B3B698 /* MockUserDefaults.swift */,
+				F2AE232A24C2169400B3B698 /* MockEventListener.swift */,
+				F27F97F624C4C382001F904A /* MockNSTableView.swift */,
+				F27F97F824C4C544001F904A /* MockNSEvent.swift */,
+				F2FFC13024C5F5A2006D19DE /* MockStatus.swift */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		F2D0B58524BF7E980044A1A2 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */,
+				F2D278FD24AFC5A700C0C63F /* AppPreferences.swift */,
+			);
+			path = "Support Files";
+			sourceTree = "<group>";
+		};
+		F2D0B58624BF7EA80044A1A2 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F2D278D024AFB4C200C0C63F /* ClipboardViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F2D0B58724BF7EB30044A1A2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				F2D2790024AFCA3F00C0C63F /* ClipboardRepository.swift */,
+				F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */,
+				F2047FFE24B0DD78000381D7 /* DataModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F2D278C224AFB4C200C0C63F = {
+			isa = PBXGroup;
+			children = (
+				F2D278CD24AFB4C200C0C63F /* CopyPasteExtension */,
+				F2D278E024AFB4C300C0C63F /* CopyPasteExtensionTests */,
+				F2D278CC24AFB4C200C0C63F /* Products */,
+				6D025E3CD1839A1901050804 /* Pods */,
+				58B447F7B295EF6C1CA2DACB /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		F2D278CC24AFB4C200C0C63F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F2D278CB24AFB4C200C0C63F /* CopyPasteExtension.app */,
+				F2D278DD24AFB4C300C0C63F /* CopyPasteExtensionTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F2D278CD24AFB4C200C0C63F /* CopyPasteExtension */ = {
+			isa = PBXGroup;
+			children = (
+				F2D278CE24AFB4C200C0C63F /* AppDelegate.swift */,
+				F2D278D224AFB4C300C0C63F /* Assets.xcassets */,
+				F2D0B58624BF7EA80044A1A2 /* Controller */,
+				F2D278D824AFB4C300C0C63F /* CopyPasteExtension.entitlements */,
+				F2D278D724AFB4C300C0C63F /* Info.plist */,
+				F2D278D424AFB4C300C0C63F /* Main.storyboard */,
+				F2D0B58724BF7EB30044A1A2 /* Model */,
+				F2D0B58524BF7E980044A1A2 /* Support Files */,
+				F2D86E6A24BF814300A2E6C6 /* Utility */,
+			);
+			path = CopyPasteExtension;
+			sourceTree = "<group>";
+		};
+		F2D278E024AFB4C300C0C63F /* CopyPasteExtensionTests */ = {
+			isa = PBXGroup;
+			children = (
+				F2AE232C24C2174900B3B698 /* Mock */,
+				F2D278E324AFB4C300C0C63F /* Info.plist */,
+				F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */,
+				F2AE231F24C208E600B3B698 /* UtilitySpec.swift */,
+				F2AE232424C2145900B3B698 /* ViewControllerSpec.swift */,
+			);
+			path = CopyPasteExtensionTests;
+			sourceTree = "<group>";
+		};
+		F2D86E6A24BF814300A2E6C6 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F284B7EA24B8DBA80014B7FA /* MenuProvider.swift */,
+				F2AE232724C2159700B3B698 /* EventListenerProtocol.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F2D278CA24AFB4C200C0C63F /* CopyPasteExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2D278E624AFB4C300C0C63F /* Build configuration list for PBXNativeTarget "CopyPasteExtension" */;
+			buildPhases = (
+				A440DEE7C87FF73C1FFB48C5 /* [CP] Check Pods Manifest.lock */,
+				F2D278C724AFB4C200C0C63F /* Sources */,
+				F2D278C824AFB4C200C0C63F /* Frameworks */,
+				F2D278C924AFB4C200C0C63F /* Resources */,
+				F2D278FC24AFB5D200C0C63F /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CopyPasteExtension;
+			productName = CopyPasteExtension;
+			productReference = F2D278CB24AFB4C200C0C63F /* CopyPasteExtension.app */;
+			productType = "com.apple.product-type.application";
+		};
+		F2D278DC24AFB4C300C0C63F /* CopyPasteExtensionTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F2D278E924AFB4C300C0C63F /* Build configuration list for PBXNativeTarget "CopyPasteExtensionTests" */;
+			buildPhases = (
+				9C2C61CA8693E01CDEE5943D /* [CP] Check Pods Manifest.lock */,
+				F2D278D924AFB4C300C0C63F /* Sources */,
+				F2D278DA24AFB4C300C0C63F /* Frameworks */,
+				F2D278DB24AFB4C300C0C63F /* Resources */,
+				58A4975F02FB6F42398A384B /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F2D278DF24AFB4C300C0C63F /* PBXTargetDependency */,
+			);
+			name = CopyPasteExtensionTests;
+			productName = CopyPasteExtensionTests;
+			productReference = F2D278DD24AFB4C300C0C63F /* CopyPasteExtensionTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F2D278C324AFB4C200C0C63F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1140;
+				LastUpgradeCheck = 1130;
+				ORGANIZATIONNAME = Yolo;
+				TargetAttributes = {
+					F2D278CA24AFB4C200C0C63F = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					F2D278DC24AFB4C300C0C63F = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = F2D278CA24AFB4C200C0C63F;
+					};
+				};
+			};
+			buildConfigurationList = F2D278C624AFB4C200C0C63F /* Build configuration list for PBXProject "CopyPasteExtension" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F2D278C224AFB4C200C0C63F;
+			productRefGroup = F2D278CC24AFB4C200C0C63F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F2D278CA24AFB4C200C0C63F /* CopyPasteExtension */,
+				F2D278DC24AFB4C300C0C63F /* CopyPasteExtensionTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F2D278C924AFB4C200C0C63F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2D278D324AFB4C300C0C63F /* Assets.xcassets in Resources */,
+				F2D278D624AFB4C300C0C63F /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2D278DB24AFB4C300C0C63F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		58A4975F02FB6F42398A384B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CopyPasteExtensionTests/Pods-CopyPasteExtensionTests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-CopyPasteExtensionTests/Pods-CopyPasteExtensionTests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-CopyPasteExtensionTests/Pods-CopyPasteExtensionTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9C2C61CA8693E01CDEE5943D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CopyPasteExtensionTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A440DEE7C87FF73C1FFB48C5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-CopyPasteExtension-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F2D278C724AFB4C200C0C63F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2047FFF24B0DD78000381D7 /* DataModel.swift in Sources */,
+				F2AE232824C2159700B3B698 /* EventListenerProtocol.swift in Sources */,
+				F2D2790124AFCA3F00C0C63F /* ClipboardRepository.swift in Sources */,
+				F2D0B58224BF7A750044A1A2 /* CellIdentifier.swift in Sources */,
+				F2D0B58424BF7BCE0044A1A2 /* Extensions.swift in Sources */,
+				F2D278FE24AFC5A700C0C63F /* AppPreferences.swift in Sources */,
+				F284B7EB24B8DBA80014B7FA /* MenuProvider.swift in Sources */,
+				F2D278D124AFB4C200C0C63F /* ClipboardViewController.swift in Sources */,
+				F2D278CF24AFB4C200C0C63F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F2D278D924AFB4C300C0C63F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2AE231E24C0D17500B3B698 /* AppPreferences.swift in Sources */,
+				F2D86E6E24BF8E3400A2E6C6 /* Extensions.swift in Sources */,
+				F2D86E7024BF9EA400A2E6C6 /* ModelSpec.swift in Sources */,
+				F2AE232524C2145900B3B698 /* ViewControllerSpec.swift in Sources */,
+				F2AE231C24C0A6EC00B3B698 /* MockUserDefaults.swift in Sources */,
+				F2AE232024C208E600B3B698 /* UtilitySpec.swift in Sources */,
+				F2AE232124C20A1E00B3B698 /* MenuProvider.swift in Sources */,
+				F27F97F924C4C544001F904A /* MockNSEvent.swift in Sources */,
+				F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */,
+				F2FFC13124C5F5A2006D19DE /* MockStatus.swift in Sources */,
+				F2AE232B24C2169400B3B698 /* MockEventListener.swift in Sources */,
+				F27F97FA24C4C7E1001F904A /* CellIdentifier.swift in Sources */,
+				F2AE231D24C0CBFF00B3B698 /* ClipboardRepository.swift in Sources */,
+				F27F97F724C4C382001F904A /* MockNSTableView.swift in Sources */,
+				F2AE232924C2159700B3B698 /* EventListenerProtocol.swift in Sources */,
+				F2AE232624C214EF00B3B698 /* ClipboardViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F2D278DF24AFB4C300C0C63F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F2D278CA24AFB4C200C0C63F /* CopyPasteExtension */;
+			targetProxy = F2D278DE24AFB4C300C0C63F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		F2D278D424AFB4C300C0C63F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F2D278D524AFB4C300C0C63F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F2D278E424AFB4C300C0C63F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		F2D278E524AFB4C300C0C63F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		F2D278E724AFB4C300C0C63F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C080CE3997E844933DEDB7A /* Pods-CopyPasteExtension.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CopyPasteExtension/CopyPasteExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22A9SU6778;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = CopyPasteExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.odys1528.CopyPasteExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		F2D278E824AFB4C300C0C63F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50515BF9EFD0C45151252B05 /* Pods-CopyPasteExtension.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = CopyPasteExtension/CopyPasteExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22A9SU6778;
+				ENABLE_HARDENED_RUNTIME = YES;
+				INFOPLIST_FILE = CopyPasteExtension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MARKETING_VERSION = 0.1;
+				PRODUCT_BUNDLE_IDENTIFIER = com.odys1528.CopyPasteExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		F2D278EA24AFB4C300C0C63F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20323F3BAFBD32694CA29AA3 /* Pods-CopyPasteExtensionTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22A9SU6778;
+				INFOPLIST_FILE = CopyPasteExtensionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.odys1528.CopyPasteExtensionTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CopyPasteExtension.app/Contents/MacOS/CopyPasteExtension";
+			};
+			name = Debug;
+		};
+		F2D278EB24AFB4C300C0C63F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 32C64C5EAC268C3EDB5E0EFD /* Pods-CopyPasteExtensionTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 22A9SU6778;
+				INFOPLIST_FILE = CopyPasteExtensionTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				PRODUCT_BUNDLE_IDENTIFIER = com.odys1528.CopyPasteExtensionTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/CopyPasteExtension.app/Contents/MacOS/CopyPasteExtension";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F2D278C624AFB4C200C0C63F /* Build configuration list for PBXProject "CopyPasteExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2D278E424AFB4C300C0C63F /* Debug */,
+				F2D278E524AFB4C300C0C63F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2D278E624AFB4C300C0C63F /* Build configuration list for PBXNativeTarget "CopyPasteExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2D278E724AFB4C300C0C63F /* Debug */,
+				F2D278E824AFB4C300C0C63F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F2D278E924AFB4C300C0C63F /* Build configuration list for PBXNativeTarget "CopyPasteExtensionTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F2D278EA24AFB4C300C0C63F /* Debug */,
+				F2D278EB24AFB4C300C0C63F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F2D278C324AFB4C200C0C63F /* Project object */;
+}

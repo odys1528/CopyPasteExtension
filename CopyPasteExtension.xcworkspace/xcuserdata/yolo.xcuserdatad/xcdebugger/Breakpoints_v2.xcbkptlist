@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Bucket
+   uuid = "71454EB2-B707-4AC5-AF7A-7D35909E7AC0"
+   type = "0"
+   version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1DE478EA-1CC2-4C33-9157-2D0351F529FE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CopyPasteExtensionTests/Mock/MockEventListener.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "getStatus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "252AFEB0-07AC-4F74-A45E-ACE2D491AA3C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CopyPasteExtension/Controller/ClipboardViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "128"
+            endingLineNumber = "128"
+            landmarkName = "keyDown(with:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "252AFEB0-07AC-4F74-A45E-ACE2D491AA3C - c7c183a61572d9b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CopyPasteExtension.ClipboardViewController.keyDown(with: __C.NSEvent) -&gt; ()"
+                  moduleName = "CopyPasteExtension"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yolo/XcodeProjects/CopyPasteExtension/CopyPasteExtension/Controller/ClipboardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "175">
+               </Location>
+               <Location
+                  uuid = "252AFEB0-07AC-4F74-A45E-ACE2D491AA3C - 253c1d70937424b4"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "CopyPasteExtensionTests.ClipboardViewController.keyDown(with: __C.NSEvent) -&gt; ()"
+                  moduleName = "CopyPasteExtensionTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/yolo/XcodeProjects/CopyPasteExtension/CopyPasteExtension/Controller/ClipboardViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "128"
+                  endingLineNumber = "128"
+                  offsetFromSymbolStart = "175">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "06668CDF-E3BF-4AD7-9CA0-E8982CD6076B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "CopyPasteExtensionTests/Mock/MockNSTableView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "getStatus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
+</Bucket>
