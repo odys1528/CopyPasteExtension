@@ -8,7 +8,6 @@
 
 import Cocoa
 import Carbon
-import Carbon.HIToolbox.Events
 
 class MenuProvider: EventListenerProtocol {
     private let dataProvider: DataRepositoryProtocol
