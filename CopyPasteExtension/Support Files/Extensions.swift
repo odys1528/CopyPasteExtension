@@ -35,8 +35,8 @@ extension String {
 }
 
 extension Int {
-    func inRange(from: Int, to: Int) -> Bool {
-        return self >= from && self < to
+    func inRange(from: Int, to: Int, rightClosed: Bool = false) -> Bool {
+        return self >= from && (self < to || (rightClosed && self == to))
     }
 }
 
