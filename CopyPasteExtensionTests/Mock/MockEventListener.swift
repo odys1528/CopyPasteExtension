@@ -20,6 +20,7 @@ class MockEventListener: EventListenerProtocol {
     }
 }
 
+//MARK:- MockStatusProtocol protocol
 extension MockEventListener: MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status

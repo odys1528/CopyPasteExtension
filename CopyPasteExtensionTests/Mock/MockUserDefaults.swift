@@ -25,6 +25,7 @@ class MockUserDefaults: UserDefaults {
     }
 }
 
+//MARK:- MockStatusProtocol protocol
 extension MockUserDefaults: MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status

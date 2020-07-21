@@ -19,6 +19,7 @@ class MockNSTableView: NSTableView {
     }
 }
 
+//MARK:- MockStatusProtocol protocol
 extension MockNSTableView: MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status
