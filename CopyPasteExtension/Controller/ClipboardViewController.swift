@@ -13,7 +13,7 @@ class ClipboardViewController: NSViewController {
     @IBOutlet weak var dataTableView: NSTableView!
     var data: [DataModelProtocol] = []
     
-    internal var dataProvider: ClipboardRepository? = nil
+    internal var dataProvider: DataRepositoryProtocol? = nil
     internal var menuProvider: EventListenerProtocol? = nil
     
     override func viewDidLoad() {
@@ -104,7 +104,7 @@ extension ClipboardViewController: NSTextFieldDelegate {
         let data = newData.trim(maxLength: AppPreferences.maxDataSize)
         
         guard let dataModel = dataTableView.cellObject(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow)) as? DataModel else {
-            guard let itemId = try? dataProvider?.setData(withItemData: data) else {
+            guard let itemId = try? (dataProvider as? ClipboardRepository)?.setData(withItemData: data) else {
                 return
             }
             
@@ -135,7 +135,7 @@ extension ClipboardViewController {
         }
         
         dataTableView.removeRows(at: IndexSet(integer: selectedRow), withAnimation: .effectFade)
-        try? dataProvider?.removeData(withId: dataModel.id)
+        try? (dataProvider as? ClipboardRepository)?.removeData(withId: dataModel.id)
         refreshData()
     }
     

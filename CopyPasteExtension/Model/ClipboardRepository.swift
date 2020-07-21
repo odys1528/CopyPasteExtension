@@ -23,25 +23,6 @@ class ClipboardRepository {
         self.defaults = defaults
     }
     
-    func allData() throws -> [DataModelProtocol] {
-        var allData = [DataModel]()
-        for id in 1...AppPreferences.maxClipboardSize {
-            let data = defaults?.string(forKey: ClipboardRepository.dataId(withId: id))
-            if let data = data {
-                allData.append(DataModel(id: id, data: data))
-            }
-        }
-        
-        let optimizedData = optimizeIds(data: allData)
-        let sortedAllData = allData.sorted(by: { $0.id < $1.id })
-        if sortedAllData == optimizedData {
-            return sortedAllData
-        } else {
-            try setData(data: optimizedData)
-            return optimizedData
-        }
-    }
-    
     func setData(withItemData itemData: String!) throws -> Int {
         let itemId = nextId
         try setData(item: DataModel(id: itemId, data: itemData))
@@ -83,6 +64,25 @@ class ClipboardRepository {
 extension ClipboardRepository: DataRepositoryProtocol {
     static func dataId(withId id: Int) -> String {
         return String(format: "%@_%d", AppPreferences.dataKeyBase, id)
+    }
+    
+    func allData() throws -> [DataModelProtocol] {
+        var allData = [DataModel]()
+        for id in 1...AppPreferences.maxClipboardSize {
+            let data = defaults?.string(forKey: ClipboardRepository.dataId(withId: id))
+            if let data = data {
+                allData.append(DataModel(id: id, data: data))
+            }
+        }
+        
+        let optimizedData = optimizeIds(data: allData)
+        let sortedAllData = allData.sorted(by: { $0.id < $1.id })
+        if sortedAllData == optimizedData {
+            return sortedAllData
+        } else {
+            try setData(data: optimizedData)
+            return optimizedData
+        }
     }
     
     func getData(withItemId itemId: Int) throws -> DataModelProtocol {

@@ -11,7 +11,7 @@ import Carbon
 import Carbon.HIToolbox.Events
 
 class MenuProvider: EventListenerProtocol {
-    private let dataProvider: ClipboardRepository
+    private let dataProvider: DataRepositoryProtocol
     internal var monitor: Any?
     
     init(dataProvider: ClipboardRepository) {
@@ -28,6 +28,7 @@ class MenuProvider: EventListenerProtocol {
         guard let monitor = monitor else {
             return
         }
+        
         NSEvent.removeMonitor(monitor)
         self.monitor = nil
     }
