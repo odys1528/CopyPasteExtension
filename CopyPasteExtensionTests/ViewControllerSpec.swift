@@ -46,7 +46,8 @@ class ViewControllerSpec: QuickSpec {
                 afterEach {
                     (viewController.dataTableView as? MockStatusProtocol)?.resetStatus()
                     (viewController.dataProvider as? MockStatusProtocol)?.resetStatus()
-                    (viewController.dataProvider?.defaults as? MockStatusProtocol)?.resetStatus()
+                    let dataProvider = viewController.dataProvider as? ClipboardRepository
+                    (dataProvider?.defaults as? MockStatusProtocol)?.resetStatus()
                 }
                 
                 it("valid") {
