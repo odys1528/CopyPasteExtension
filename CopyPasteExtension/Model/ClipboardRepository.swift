@@ -10,14 +10,6 @@ import Foundation
 
 class ClipboardRepository {
     let defaults: UserDefaults?
-    private var nextId: Int {
-        for id in 1...AppPreferences.maxClipboardSize {
-            guard let _ = defaults?.string(forKey: ClipboardRepository.dataId(withId: id)) else {
-                return id
-            }
-        }
-        return AppPreferences.maxClipboardSize
-    }
     
     init(defaults: UserDefaults?) {
         self.defaults = defaults
@@ -30,7 +22,7 @@ class ClipboardRepository {
     }
     
     func removeData(withId itemId: Int) throws {
-        guard 1...AppPreferences.maxClipboardSize ~= itemId else {
+        guard idRange ~= itemId else {
             throw DataProviderError.idOutOfRange
         }
         
@@ -54,9 +46,24 @@ class ClipboardRepository {
     }
     
     private func clearAllData() {
-        for id in 1...AppPreferences.maxClipboardSize {
+        for id in idRange {
             try? removeData(withId: id)
         }
+    }
+}
+
+extension ClipboardRepository {
+    private var nextId: Int {
+        for id in idRange {
+            guard let _ = defaults?.string(forKey: ClipboardRepository.dataId(withId: id)) else {
+                return id
+            }
+        }
+        return AppPreferences.maxClipboardSize
+    }
+    
+    private var idRange: ClosedRange<Int> {
+        return 1...AppPreferences.maxClipboardSize
     }
 }
 
@@ -68,7 +75,7 @@ extension ClipboardRepository: DataRepositoryProtocol {
     
     func allData() throws -> [DataModelProtocol] {
         var allData = [DataModel]()
-        for id in 1...AppPreferences.maxClipboardSize {
+        for id in idRange {
             let data = defaults?.string(forKey: ClipboardRepository.dataId(withId: id))
             if let data = data {
                 allData.append(DataModel(id: id, data: data))
@@ -86,7 +93,7 @@ extension ClipboardRepository: DataRepositoryProtocol {
     }
     
     func getData(withItemId itemId: Int) throws -> DataModelProtocol {
-        guard 1...AppPreferences.maxClipboardSize ~= itemId else {
+        guard idRange ~= itemId else {
             throw DataProviderError.idOutOfRange
         }
         
@@ -99,7 +106,7 @@ extension ClipboardRepository: DataRepositoryProtocol {
     
     func setData(item: DataModelProtocol) throws {
         let itemId: Int! = item.id
-        guard 1...AppPreferences.maxClipboardSize ~= itemId else {
+        guard idRange ~= itemId else {
             throw DataProviderError.idOutOfRange
         }
         
