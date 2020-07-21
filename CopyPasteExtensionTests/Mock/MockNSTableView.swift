@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MockNSTableView: NSTableView, MockStatusProtocol {
+class MockNSTableView: NSTableView {
     private var status = MockStatus.unknown
     override var selectedRow: Int {
         return 0
@@ -17,7 +17,9 @@ class MockNSTableView: NSTableView, MockStatusProtocol {
     override func removeRows(at indexes: IndexSet, withAnimation animationOptions: NSTableView.AnimationOptions = []) {
         status = .removed
     }
-    
+}
+
+extension MockNSTableView: MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status
     }

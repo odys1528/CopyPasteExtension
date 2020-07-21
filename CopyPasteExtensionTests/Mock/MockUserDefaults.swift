@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockUserDefaults: UserDefaults, MockStatusProtocol {
+class MockUserDefaults: UserDefaults {
     typealias MockedStringReturn = (String) -> String?
     var mockedStringReturn: MockedStringReturn? = nil
     private var status = MockStatus.unknown
@@ -23,7 +23,9 @@ class MockUserDefaults: UserDefaults, MockStatusProtocol {
     override func removeObject(forKey defaultName: String) {
         status = .removed
     }
-    
+}
+
+extension MockUserDefaults: MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status
     }

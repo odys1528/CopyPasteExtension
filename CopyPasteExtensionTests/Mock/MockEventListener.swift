@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MockEventListener: EventListenerProtocol, MockStatusProtocol {
+class MockEventListener: EventListenerProtocol {
     private var status = MockStatus.unknown
     
     func addEventListener(on eventType: NSEvent.EventTypeMask) {
@@ -18,7 +18,9 @@ class MockEventListener: EventListenerProtocol, MockStatusProtocol {
     func removeEventListener() {
         status = .removed
     }
-    
+}
+
+extension MockEventListener: MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status
     }
