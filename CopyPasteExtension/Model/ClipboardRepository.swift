@@ -12,7 +12,7 @@ class ClipboardRepository {
     let defaults: UserDefaults?
     private var nextId: Int {
         for id in 1...AppPreferences.maxClipboardSize {
-            guard let _ = defaults?.string(forKey: AppPreferences.dataId(withId: id)) else {
+            guard let _ = defaults?.string(forKey: ClipboardRepository.dataId(withId: id)) else {
                 return id
             }
         }
@@ -23,22 +23,10 @@ class ClipboardRepository {
         self.defaults = defaults
     }
     
-    func getData(withItemId itemId: Int) throws -> DataModel {
-        guard 1...AppPreferences.maxClipboardSize ~= itemId else {
-            throw DataProviderError.idOutOfRange
-        }
-        
-        let data = defaults?.string(forKey: AppPreferences.dataId(withId: itemId))
-        if let data = data {
-            return DataModel(id: itemId, data: data)
-        }
-        throw DataProviderError.noDataWithId
-    }
-    
-    func allData() throws -> [DataModel] {
+    func allData() throws -> [DataModelProtocol] {
         var allData = [DataModel]()
         for id in 1...AppPreferences.maxClipboardSize {
-            let data = defaults?.string(forKey: AppPreferences.dataId(withId: id))
+            let data = defaults?.string(forKey: ClipboardRepository.dataId(withId: id))
             if let data = data {
                 allData.append(DataModel(id: id, data: data))
             }
@@ -54,22 +42,9 @@ class ClipboardRepository {
         }
     }
     
-    func setData(item: DataModel) throws {
-        let itemId: Int! = item.id
-        guard 1...AppPreferences.maxClipboardSize ~= itemId else {
-            throw DataProviderError.idOutOfRange
-        }
-        
-        defaults?.setValue(item.data, forKey: AppPreferences.dataId(withId: itemId))
-    }
-    
     func setData(withItemData itemData: String!) throws -> Int {
         let itemId = nextId
-        guard 1...AppPreferences.maxClipboardSize ~= itemId else {
-            throw DataProviderError.idOutOfRange
-        }
-        
-        defaults?.setValue(itemData, forKey: AppPreferences.dataId(withId: itemId))
+        try setData(item: DataModel(id: itemId, data: itemData))
         return itemId
     }
     
@@ -78,7 +53,7 @@ class ClipboardRepository {
             throw DataProviderError.idOutOfRange
         }
         
-        defaults?.removeObject(forKey: AppPreferences.dataId(withId: itemId))
+        defaults?.removeObject(forKey: ClipboardRepository.dataId(withId: itemId))
     }
     
     private func optimizeIds(data: [DataModel]) -> [DataModel] {
@@ -90,7 +65,7 @@ class ClipboardRepository {
         return optimizedData
     }
     
-    private func setData(data: [DataModel]) throws {
+    private func setData(data: [DataModelProtocol]) throws {
         clearAllData()
         try data.forEach { dataModel in
             try setData(item: dataModel)
@@ -104,10 +79,35 @@ class ClipboardRepository {
     }
 }
 
-//MARK:- AppPreferences extension
-private extension AppPreferences {
+//MARK:- DataRepositoryProtocol protocol
+extension ClipboardRepository: DataRepositoryProtocol {
     static func dataId(withId id: Int) -> String {
         return String(format: "%@_%d", AppPreferences.dataKeyBase, id)
+    }
+    
+    func getData(withItemId itemId: Int) throws -> DataModelProtocol {
+        guard 1...AppPreferences.maxClipboardSize ~= itemId else {
+            throw DataProviderError.idOutOfRange
+        }
+        
+        let data = defaults?.string(forKey: ClipboardRepository.dataId(withId: itemId))
+        if let data = data {
+            return DataModel(id: itemId, data: data)
+        }
+        throw DataProviderError.noDataWithId
+    }
+    
+    func setData(item: DataModelProtocol) throws {
+        let itemId: Int! = item.id
+        guard 1...AppPreferences.maxClipboardSize ~= itemId else {
+            throw DataProviderError.idOutOfRange
+        }
+        
+        defaults?.setValue(item.data, forKey: ClipboardRepository.dataId(withId: itemId))
+    }
+    
+    func removeData(item: DataModelProtocol) throws {
+        try removeData(withId: item.id)
     }
 }
 

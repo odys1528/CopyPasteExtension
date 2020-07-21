@@ -11,7 +11,7 @@ import Carbon
 
 class ClipboardViewController: NSViewController {
     @IBOutlet weak var dataTableView: NSTableView!
-    var data: [DataModel] = []
+    var data: [DataModelProtocol] = []
     
     internal var dataProvider: ClipboardRepository? = nil
     internal var menuProvider: EventListenerProtocol? = nil

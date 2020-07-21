@@ -21,7 +21,7 @@ extension NSMenuItem {
         return labelItem
     }
     
-    static func initMenuItem(with dataModel: DataModel, onClick: Selector) -> NSMenuItem {
+    static func initMenuItem(with dataModel: DataModelProtocol, onClick: Selector) -> NSMenuItem {
         let menuItem = NSMenuItem(title: dataModel.data, action: onClick)
         menuItem.representedObject = dataModel
         return menuItem

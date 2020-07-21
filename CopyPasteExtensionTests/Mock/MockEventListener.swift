@@ -18,8 +18,15 @@ class MockEventListener: EventListenerProtocol {
     func removeEventListener() {
         status = .removed
     }
-    
+}
+
+//MARK:- MockStatusProtocol protocol
+extension MockEventListener: MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status
+    }
+    
+    func resetStatus() {
+        status = .unknown
     }
 }

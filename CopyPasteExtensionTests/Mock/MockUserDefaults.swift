@@ -23,8 +23,15 @@ class MockUserDefaults: UserDefaults {
     override func removeObject(forKey defaultName: String) {
         status = .removed
     }
-    
+}
+
+//MARK:- MockStatusProtocol protocol
+extension MockUserDefaults: MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status
+    }
+    
+    func resetStatus() {
+        status = .unknown
     }
 }

@@ -13,39 +13,37 @@ class ModelSpec: QuickSpec {
     override func spec() {
         describe("the data model") {
             context("comparing objects") {
+                let model1 = DataModel(id: 42, data: "nana")
+                let model2 = DataModel(id: 42, data: "nana")
+                let model3 = DataModel(id: 24, data: "nana")
+                let model4 = DataModel(id: 42, data: "sialala")
+                
                 describe("the objects are equal") {
                     it("all properties are the same") {
-                        let model1 = DataModel(id: 42, data: "nana")
-                        let model2 = DataModel(id: 42, data: "nana")
                         expect(model1) == model2
                     }
                 }
                 
                 describe("objects are not equal") {
                     it("id is different") {
-                        let model1 = DataModel(id: 42, data: "nana")
-                        let model2 = DataModel(id: 24, data: "nana")
-                        expect(model1) !== model2
+                        expect(model1) !== model3
                     }
                     
                     it("data is different") {
-                        let model1 = DataModel(id: 42, data: "nana")
-                        let model2 = DataModel(id: 42, data: "sialala")
-                        expect(model1) !== model2
+                        expect(model1) !== model4
                     }
                     
                     it("both properies are different") {
-                        let model1 = DataModel(id: 24, data: "nana")
-                        let model2 = DataModel(id: 42, data: "sialala")
-                        expect(model1) !== model2
+                        expect(model3) !== model4
                     }
                 }
             }
             
             context("comparing arrays of objects") {
+                let array1 = [DataModel(id: 42, data: "nana"), DataModel(id: 24, data: "sialala")]
+                
                 describe("arrays are equal") {
                     it("they have equal objects in the same order") {
-                        let array1 = [DataModel(id: 42, data: "nana"), DataModel(id: 24, data: "sialala")]
                         let array2 = [DataModel(id: 42, data: "nana"), DataModel(id: 24, data: "sialala")]
                         expect(array1) == array2
                     }
@@ -53,19 +51,16 @@ class ModelSpec: QuickSpec {
                 
                 describe("arrays are not equal") {
                     it("items are in different order") {
-                        let array1 = [DataModel(id: 42, data: "nana"), DataModel(id: 24, data: "sialala")]
                         let array2 = [DataModel(id: 24, data: "sialala"), DataModel(id: 42, data: "nana")]
                         expect(array1) !== array2
                     }
                     
                     it("sizes are not the same") {
-                        let array1 = [DataModel(id: 42, data: "nana"), DataModel(id: 24, data: "sialala")]
                         let array2 = [DataModel(id: 42, data: "nana")]
                         expect(array1) !== array2
                     }
                     
                     it("any of items is not equal") {
-                        let array1 = [DataModel(id: 42, data: "nana"), DataModel(id: 24, data: "sialala")]
                         let array2 = [DataModel(id: 42, data: "nana"), DataModel(id: 24, data: "sia")]
                         expect(array1) !== array2
                     }
@@ -74,6 +69,7 @@ class ModelSpec: QuickSpec {
             
             context("getting an item from array") {
                 let array = [0, 1, 2, 3]
+                
                 describe("item is returned") {
                     it("index is in range") {
                         expect(array.itemOrNil(index: array.count)).to(beNil())
@@ -100,7 +96,7 @@ class ModelSpec: QuickSpec {
                             return mockDataModel.data
                         }
                         
-                        let dataModel = try? dataProvider.getData(withItemId: mockDataModel.id)
+                        let dataModel = try? dataProvider.getData(withItemId: mockDataModel.id) as? DataModel
                         expect(dataModel) == mockDataModel
                     }
                     
@@ -122,7 +118,7 @@ class ModelSpec: QuickSpec {
                         mockDefaults.mockedStringReturn = { key in
                             var resultData: String? = nil
                             mockDataModelArray.forEach { mockDataModel in
-                                if key.contains("\(mockDataModel.id ?? -1)") {
+                                if key == ClipboardRepository.dataId(withId: mockDataModel.id) {
                                     resultData = mockDataModel.data
                                 }
                             }
@@ -142,14 +138,14 @@ class ModelSpec: QuickSpec {
                         mockDefaults.mockedStringReturn = { key in
                             var resultData: String? = nil
                             mockDataModelArray.forEach { mockDataModel in
-                                if key.contains("\(mockDataModel.id ?? -1)") {
+                                if key == ClipboardRepository.dataId(withId: mockDataModel.id) {
                                     resultData = mockDataModel.data
                                 }
                             }
                             return resultData
                         }
                         
-                        let dataModelArray = try? dataProvider.allData()
+                        let dataModelArray = try? dataProvider.allData() as? [DataModel]
                         expect(dataModelArray) == mockDataModelArray
                     }
                 }

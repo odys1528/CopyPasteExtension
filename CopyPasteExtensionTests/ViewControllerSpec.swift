@@ -17,32 +17,39 @@ class ViewControllerSpec: QuickSpec {
             
             context("on view events") {
                 let `switch` = NSSwitch()
+                viewController.menuProvider = MockEventListener()
                 
-                beforeEach {
-                    viewController.menuProvider = MockEventListener()
+                afterEach {
+                    (viewController.menuProvider as? MockStatusProtocol)?.resetStatus()
                 }
                 
                 it("on") {
                     `switch`.state = .on
                     viewController.switchChange(`switch`)
-                    expect((viewController.menuProvider as? MockEventListener)?.getStatus()) == .added
+                    expect((viewController.menuProvider as? MockStatusProtocol)?.getStatus()) == .added
                 }
                 
                 it("off") {
                     `switch`.state = .off
                     viewController.switchChange(`switch`)
-                    expect((viewController.menuProvider as? MockEventListener)?.getStatus()) == .removed
+                    expect((viewController.menuProvider as? MockStatusProtocol)?.getStatus()) == .removed
                 }
             }
             
             context("on key events") {
+                let mockNSTableView = MockNSTableView()
+                viewController.dataTableView = mockNSTableView
+                let mockDefaults = MockUserDefaults()
+                viewController.dataProvider = ClipboardRepository(defaults: mockDefaults)
+                viewController.data = [DataModel(id: 1, data: "mocked")]
+                
+                afterEach {
+                    (viewController.dataTableView as? MockStatusProtocol)?.resetStatus()
+                    (viewController.dataProvider as? MockStatusProtocol)?.resetStatus()
+                    (viewController.dataProvider?.defaults as? MockStatusProtocol)?.resetStatus()
+                }
+                
                 it("valid") {
-                    let mockNSTableView = MockNSTableView()
-                    viewController.dataTableView = mockNSTableView
-                    let mockDefaults = MockUserDefaults()
-                    viewController.dataProvider = ClipboardRepository(defaults: mockDefaults)
-                    viewController.data = [DataModel(id: 1, data: "mocked")]
-                    
                     guard let keyEvent = NSEvent.mockEvent(with: kVK_Delete) else {
                         fail()
                         return
@@ -54,12 +61,6 @@ class ViewControllerSpec: QuickSpec {
                 }
 
                 it("invalid") {
-                    let mockNSTableView = MockNSTableView()
-                    viewController.dataTableView = mockNSTableView
-                    let mockDefaults = MockUserDefaults()
-                    viewController.dataProvider = ClipboardRepository(defaults: mockDefaults)
-                    viewController.data = [DataModel(id: 1, data: "mocked")]
-                    
                     guard let keyEvent = NSEvent.mockEvent(with: kVK_ANSI_X) else {
                         fail()
                         return
