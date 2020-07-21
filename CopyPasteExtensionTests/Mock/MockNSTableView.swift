@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class MockNSTableView: NSTableView {
+class MockNSTableView: NSTableView, MockStatusProtocol {
     private var status = MockStatus.unknown
     override var selectedRow: Int {
         return 0

@@ -35,7 +35,7 @@
 		F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2047FFE24B0DD78000381D7 /* DataModel.swift */; };
 		F2D86E6E24BF8E3400A2E6C6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */; };
 		F2D86E7024BF9EA400A2E6C6 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */; };
-		F2FFC13124C5F5A2006D19DE /* MockStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FFC13024C5F5A2006D19DE /* MockStatus.swift */; };
+		F2FFC13124C5F5A2006D19DE /* MockStatusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,7 +91,7 @@
 		F2D278FD24AFC5A700C0C63F /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 		F2D2790024AFCA3F00C0C63F /* ClipboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardRepository.swift; sourceTree = "<group>"; };
 		F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
-		F2FFC13024C5F5A2006D19DE /* MockStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStatus.swift; sourceTree = "<group>"; };
+		F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStatusProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,7 +141,7 @@
 				F2AE232A24C2169400B3B698 /* MockEventListener.swift */,
 				F27F97F624C4C382001F904A /* MockNSTableView.swift */,
 				F27F97F824C4C544001F904A /* MockNSEvent.swift */,
-				F2FFC13024C5F5A2006D19DE /* MockStatus.swift */,
+				F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -423,7 +423,7 @@
 				F2AE232124C20A1E00B3B698 /* MenuProvider.swift in Sources */,
 				F27F97F924C4C544001F904A /* MockNSEvent.swift in Sources */,
 				F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */,
-				F2FFC13124C5F5A2006D19DE /* MockStatus.swift in Sources */,
+				F2FFC13124C5F5A2006D19DE /* MockStatusProtocol.swift in Sources */,
 				F2AE232B24C2169400B3B698 /* MockEventListener.swift in Sources */,
 				F27F97FA24C4C7E1001F904A /* CellIdentifier.swift in Sources */,
 				F2AE231D24C0CBFF00B3B698 /* ClipboardRepository.swift in Sources */,

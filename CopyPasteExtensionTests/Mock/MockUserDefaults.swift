@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MockUserDefaults: UserDefaults {
+class MockUserDefaults: UserDefaults, MockStatusProtocol {
     typealias MockedStringReturn = (String) -> String?
     var mockedStringReturn: MockedStringReturn? = nil
     private var status = MockStatus.unknown
