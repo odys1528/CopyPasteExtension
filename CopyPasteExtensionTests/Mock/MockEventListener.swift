@@ -22,4 +22,8 @@ class MockEventListener: EventListenerProtocol, MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status
     }
+    
+    func resetStatus() {
+        status = .unknown
+    }
 }

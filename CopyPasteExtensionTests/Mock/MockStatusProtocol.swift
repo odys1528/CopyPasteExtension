@@ -8,6 +8,7 @@
 
 protocol MockStatusProtocol {
     func getStatus() -> MockStatus
+    func resetStatus()
 }
 
 enum MockStatus {

@@ -27,4 +27,8 @@ class MockUserDefaults: UserDefaults, MockStatusProtocol {
     func getStatus() -> MockStatus {
         return status
     }
+    
+    func resetStatus() {
+        status = .unknown
+    }
 }
