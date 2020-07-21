@@ -96,7 +96,7 @@ class ModelSpec: QuickSpec {
                             return mockDataModel.data
                         }
                         
-                        let dataModel = try? dataProvider.getData(withItemId: mockDataModel.id)
+                        let dataModel = try? dataProvider.getData(withItemId: mockDataModel.id) as? DataModel
                         expect(dataModel) == mockDataModel
                     }
                     
@@ -118,7 +118,7 @@ class ModelSpec: QuickSpec {
                         mockDefaults.mockedStringReturn = { key in
                             var resultData: String? = nil
                             mockDataModelArray.forEach { mockDataModel in
-                                if key.contains("\(mockDataModel.id ?? -1)") {
+                                if key == ClipboardRepository.dataId(withId: mockDataModel.id) {
                                     resultData = mockDataModel.data
                                 }
                             }
@@ -138,14 +138,14 @@ class ModelSpec: QuickSpec {
                         mockDefaults.mockedStringReturn = { key in
                             var resultData: String? = nil
                             mockDataModelArray.forEach { mockDataModel in
-                                if key.contains("\(mockDataModel.id ?? -1)") {
+                                if key == ClipboardRepository.dataId(withId: mockDataModel.id) {
                                     resultData = mockDataModel.data
                                 }
                             }
                             return resultData
                         }
                         
-                        let dataModelArray = try? dataProvider.allData()
+                        let dataModelArray = try? dataProvider.allData() as? [DataModel]
                         expect(dataModelArray) == mockDataModelArray
                     }
                 }

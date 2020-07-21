@@ -24,6 +24,10 @@
 		F2AE232824C2159700B3B698 /* EventListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE232724C2159700B3B698 /* EventListenerProtocol.swift */; };
 		F2AE232924C2159700B3B698 /* EventListenerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE232724C2159700B3B698 /* EventListenerProtocol.swift */; };
 		F2AE232B24C2169400B3B698 /* MockEventListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2AE232A24C2169400B3B698 /* MockEventListener.swift */; };
+		F2B805C524C7513E00E192F5 /* DataRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B805C424C7513E00E192F5 /* DataRepositoryProtocol.swift */; };
+		F2B805C624C7533600E192F5 /* DataRepositoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B805C424C7513E00E192F5 /* DataRepositoryProtocol.swift */; };
+		F2B805C824C7549A00E192F5 /* DataModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B805C724C7549A00E192F5 /* DataModelProtocol.swift */; };
+		F2B805C924C7599F00E192F5 /* DataModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2B805C724C7549A00E192F5 /* DataModelProtocol.swift */; };
 		F2D0B58224BF7A750044A1A2 /* CellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */; };
 		F2D0B58424BF7BCE0044A1A2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */; };
 		F2D278CF24AFB4C200C0C63F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D278CE24AFB4C200C0C63F /* AppDelegate.swift */; };
@@ -77,6 +81,8 @@
 		F2AE232424C2145900B3B698 /* ViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSpec.swift; sourceTree = "<group>"; };
 		F2AE232724C2159700B3B698 /* EventListenerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventListenerProtocol.swift; sourceTree = "<group>"; };
 		F2AE232A24C2169400B3B698 /* MockEventListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockEventListener.swift; sourceTree = "<group>"; };
+		F2B805C424C7513E00E192F5 /* DataRepositoryProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataRepositoryProtocol.swift; sourceTree = "<group>"; };
+		F2B805C724C7549A00E192F5 /* DataModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModelProtocol.swift; sourceTree = "<group>"; };
 		F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellIdentifier.swift; sourceTree = "<group>"; };
 		F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F2D278CB24AFB4C200C0C63F /* CopyPasteExtension.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CopyPasteExtension.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -169,6 +175,8 @@
 				F2D2790024AFCA3F00C0C63F /* ClipboardRepository.swift */,
 				F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */,
 				F2047FFE24B0DD78000381D7 /* DataModel.swift */,
+				F2B805C424C7513E00E192F5 /* DataRepositoryProtocol.swift */,
+				F2B805C724C7549A00E192F5 /* DataModelProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -399,12 +407,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2047FFF24B0DD78000381D7 /* DataModel.swift in Sources */,
+				F2B805C524C7513E00E192F5 /* DataRepositoryProtocol.swift in Sources */,
 				F2AE232824C2159700B3B698 /* EventListenerProtocol.swift in Sources */,
 				F2D2790124AFCA3F00C0C63F /* ClipboardRepository.swift in Sources */,
 				F2D0B58224BF7A750044A1A2 /* CellIdentifier.swift in Sources */,
 				F2D0B58424BF7BCE0044A1A2 /* Extensions.swift in Sources */,
 				F2D278FE24AFC5A700C0C63F /* AppPreferences.swift in Sources */,
 				F284B7EB24B8DBA80014B7FA /* MenuProvider.swift in Sources */,
+				F2B805C824C7549A00E192F5 /* DataModelProtocol.swift in Sources */,
 				F2D278D124AFB4C200C0C63F /* ClipboardViewController.swift in Sources */,
 				F2D278CF24AFB4C200C0C63F /* AppDelegate.swift in Sources */,
 			);
@@ -425,7 +435,9 @@
 				F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */,
 				F2FFC13124C5F5A2006D19DE /* MockStatusProtocol.swift in Sources */,
 				F2AE232B24C2169400B3B698 /* MockEventListener.swift in Sources */,
+				F2B805C624C7533600E192F5 /* DataRepositoryProtocol.swift in Sources */,
 				F27F97FA24C4C7E1001F904A /* CellIdentifier.swift in Sources */,
+				F2B805C924C7599F00E192F5 /* DataModelProtocol.swift in Sources */,
 				F2AE231D24C0CBFF00B3B698 /* ClipboardRepository.swift in Sources */,
 				F27F97F724C4C382001F904A /* MockNSTableView.swift in Sources */,
 				F2AE232924C2159700B3B698 /* EventListenerProtocol.swift in Sources */,

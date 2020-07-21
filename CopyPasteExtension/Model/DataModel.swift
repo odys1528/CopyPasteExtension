@@ -6,7 +6,7 @@
 //  Copyright © 2020 Yolo. All rights reserved.
 //
 
-struct DataModel {
+struct DataModel: DataModelProtocol {
     var id: Int!
     var data: String!
     
