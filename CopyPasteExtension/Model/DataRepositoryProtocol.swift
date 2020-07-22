@@ -8,6 +8,7 @@
 
 protocol DataRepositoryProtocol {
     static func dataId(withId id: Int) -> String
+    func allData() throws -> [DataModelProtocol]
     func getData(withItemId itemId: Int) throws -> DataModelProtocol
     func setData(item: DataModelProtocol) throws
     func removeData(item: DataModelProtocol) throws

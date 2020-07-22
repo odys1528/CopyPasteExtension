@@ -13,7 +13,7 @@ class ClipboardViewController: NSViewController {
     @IBOutlet weak var dataTableView: NSTableView!
     var data: [DataModelProtocol] = []
     
-    internal var dataProvider: ClipboardRepository? = nil
+    internal var dataProvider: DataRepositoryProtocol? = nil
     internal var menuProvider: EventListenerProtocol? = nil
     
     override func viewDidLoad() {
@@ -102,21 +102,23 @@ extension ClipboardViewController: NSTextFieldDelegate {
         }
         
         let data = newData.trim(maxLength: AppPreferences.maxDataSize)
+        let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
+        cellView?.textField?.stringValue = data
         
-        guard let dataModel = dataTableView.cellObject(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow)) as? DataModel else {
-            guard let itemId = try? dataProvider?.setData(withItemData: data) else {
+        guard let dataModel = cellView?.objectValue as? DataModel else {
+            guard let itemId = try? (dataProvider as? ClipboardRepository)?.setData(withItemData: data) else {
                 return
             }
             
             let updatedDataModel = DataModel(id: itemId, data: data)
-            dataTableView.setCellObject(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow), object: updatedDataModel)
+            cellView?.objectValue = updatedDataModel
             
             refreshData()
             return
         }
         
         let updatedDataModel = DataModel(id: dataModel.id, data: data)
-        dataTableView.setCellObject(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow), object: updatedDataModel)
+        cellView?.objectValue = updatedDataModel
         try? dataProvider?.setData(item: updatedDataModel)
         refreshData()
     }
@@ -135,7 +137,7 @@ extension ClipboardViewController {
         }
         
         dataTableView.removeRows(at: IndexSet(integer: selectedRow), withAnimation: .effectFade)
-        try? dataProvider?.removeData(withId: dataModel.id)
+        try? (dataProvider as? ClipboardRepository)?.removeData(withId: dataModel.id)
         refreshData()
     }
     
@@ -151,17 +153,5 @@ extension ClipboardViewController {
 private extension NSTableView {
     func cellView(cellIdentifier: CellIdentifier) -> NSTableCellView? {
         return view(atColumn: column(withIdentifier: cellIdentifier.identifier.itemIdentifier), row: cellIdentifier.row, makeIfNecessary: false) as? NSTableCellView
-    }
-    
-    func cellDataField(cellIdentifier: CellIdentifier) -> NSTextField? {
-        return cellView(cellIdentifier: cellIdentifier)?.textField
-    }
-    
-    func cellObject(cellIdentifier: CellIdentifier) -> Any? {
-        return cellView(cellIdentifier: cellIdentifier)?.objectValue
-    }
-
-    func setCellObject(cellIdentifier: CellIdentifier, object: Any?) {
-        cellView(cellIdentifier: cellIdentifier)?.objectValue = object
     }
 }
