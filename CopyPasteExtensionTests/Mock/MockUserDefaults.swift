@@ -12,12 +12,14 @@ class MockUserDefaults: UserDefaults {
     typealias MockedStringReturn = (String) -> String?
     var mockedStringReturn: MockedStringReturn? = nil
     private var status = MockStatus.unknown
+    var dataSaved: [String: Any?] = [:]
     
     override func string(forKey defaultName: String) -> String? {
         return mockedStringReturn?(defaultName)
     }
     
-    override class func setValue(_ value: Any?, forKey key: String) {
+    override func setValue(_ value: Any?, forKey key: String) {
+        dataSaved[key] = value
     }
     
     override func removeObject(forKey defaultName: String) {
@@ -33,5 +35,6 @@ extension MockUserDefaults: MockStatusProtocol {
     
     func resetStatus() {
         status = .unknown
+        dataSaved = [:]
     }
 }

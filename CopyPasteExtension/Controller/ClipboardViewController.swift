@@ -103,6 +103,7 @@ extension ClipboardViewController: NSTextFieldDelegate {
         
         let data = newData.trim(maxLength: AppPreferences.maxDataSize)
         let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
+        cellView?.textField?.stringValue = data
         
         guard let dataModel = cellView?.objectValue as? DataModel else {
             guard let itemId = try? (dataProvider as? ClipboardRepository)?.setData(withItemData: data) else {

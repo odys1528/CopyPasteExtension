@@ -9,9 +9,10 @@
 import Cocoa
 
 class MockNSTableView: NSTableView {
+    var mockSelectedRow: Int = 0
     private var status = MockStatus.unknown
     override var selectedRow: Int {
-        return 0
+        return mockSelectedRow
     }
     
     override func removeRows(at indexes: IndexSet, withAnimation animationOptions: NSTableView.AnimationOptions = []) {
