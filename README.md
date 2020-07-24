@@ -1,4 +1,5 @@
-![App Logo](/images/cpe-logo.png)
+<img src="/images/cpe-logo.png" width="100" height="100">
+
 # CopyPasteExtension
 
 ## Intro
