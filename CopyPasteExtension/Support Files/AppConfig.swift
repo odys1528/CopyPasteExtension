@@ -35,6 +35,7 @@ class AppConfig: Codable {
     }
 }
 
+//MARK:- read config file
 extension AppConfig {
     private static let fileExtension = "plist"
     
@@ -68,6 +69,7 @@ extension AppConfig {
     }
 }
 
+//MARK:- encoding/decoding object from data
 extension AppConfig {
     private func encodeObject() throws -> Data? {
         return try PropertyListEncoder().encode(self)
@@ -78,6 +80,7 @@ extension AppConfig {
     }
 }
 
+//MARK:- default object
 extension AppConfig {
     private static let defaultConfig = AppConfig(
         maxDataSize: AppPreferences.maxDataSize,
@@ -85,6 +88,7 @@ extension AppConfig {
     )
 }
 
+//MARK:- errors
 private enum AppConfigError: LocalizedError {
     case invalidFilename
     
