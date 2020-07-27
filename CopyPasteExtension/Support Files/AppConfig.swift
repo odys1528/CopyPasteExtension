@@ -49,10 +49,9 @@ extension AppConfig: AppConfigProtocol {
         let pathURL = URL(fileURLWithPath: path)
         
         guard fileManager.fileExists(atPath: path) else {
-            fileManager.createFile(atPath: path, contents: nil)
             
             let configObject = AppConfig.defaultConfig
-            if let configData = try? configObject.encodeObject() {
+            if let configData = try? configObject.encodeObject(), fileManager.createFile(atPath: path, contents: nil) {
                 try? configData.write(to: pathURL)
             }
             
