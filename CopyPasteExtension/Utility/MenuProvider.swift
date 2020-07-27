@@ -38,7 +38,6 @@ final class MenuProvider: EventListenerProtocol {
     
     internal func createMenu() -> NSMenu {
         let clipboardMenu = NSMenu(title: AppPreferences.menuLabel)
-        clipboardMenu.addItem(NSMenuItem.separator())
         let labelItem = NSMenuItem.labelMenuItem(title: AppPreferences.menuLabel)
         clipboardMenu.addItem(labelItem)
         
@@ -47,7 +46,6 @@ final class MenuProvider: EventListenerProtocol {
             menuItem.target = self
             clipboardMenu.addItem(menuItem)
         }
-        clipboardMenu.addItem(NSMenuItem.separator())
         
         return clipboardMenu
     }

@@ -34,12 +34,25 @@ class UtilitySpec: QuickSpec {
             }
             
             context("menu creation") {
-                mockDefaults.mockedStringReturn = { _ in
-                    return "nana"
+                beforeEach {
+                    mockDefaults.mockedStringReturn = nil
                 }
                 
-                let menu = menuProvider.createMenu()
-                expect(menu).notTo(beNil())
+                it("some menu items") {
+                    mockDefaults.mockedStringReturn = { _ in
+                        return "nana"
+                    }
+                    
+                    let menu = menuProvider.createMenu()
+                    expect(menu.items.count) > 1
+                }
+                
+                it("no menu items") {
+                    mockDefaults.mockedStringReturn = nil
+                    
+                    let menu = menuProvider.createMenu()
+                    expect(menu.items.count) == 1
+                }
             }
         }
     }
