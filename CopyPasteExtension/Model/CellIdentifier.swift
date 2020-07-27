@@ -9,16 +9,16 @@
 import Cocoa
 
 struct CellIdentifier {
-    let identifier: UserInterfaceItemIdentifier
+    let identifier: ItemIdentifierProtocol
     let row: Int
     
-    init(identifier: UserInterfaceItemIdentifier, row: Int) {
+    init(identifier: ItemIdentifierProtocol, row: Int) {
         self.identifier = identifier
         self.row = row
     }
 }
 
-enum TableIdentifier: String, UserInterfaceItemIdentifier {
+enum TableIdentifier: String, ItemIdentifierProtocol {
     case dataCell
     case dataColumn
     
@@ -27,6 +27,6 @@ enum TableIdentifier: String, UserInterfaceItemIdentifier {
     }
 }
 
-protocol UserInterfaceItemIdentifier {
+protocol ItemIdentifierProtocol {
     var itemIdentifier: NSUserInterfaceItemIdentifier { get }
 }

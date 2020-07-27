@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AppConfig: Codable {
+final class AppConfig {
     let maxDataSize: Int
     let maxClipboardSize: Int
     
@@ -36,10 +36,10 @@ class AppConfig: Codable {
 }
 
 //MARK:- read config file
-extension AppConfig {
+extension AppConfig: AppConfigProtocol {
     private static let fileExtension = "plist"
     
-    static func readConfigFile(fileManager: FileManager = FileManager.default) throws -> AppConfig {
+    static func readConfigFile(fileManager: FileManager = FileManager.default) throws -> AppConfigProtocol {
         guard let filename = AppPreferences.configFile.appendingPathExtension(fileExtension) else {
             throw AppConfigError.invalidFilename
         }
@@ -60,7 +60,7 @@ extension AppConfig {
         }
         
         guard let configData = try? Data(contentsOf: pathURL),
-            let configObject = try? AppConfig.decodeObject(from: configData)
+            let configObject = try? AppConfig.decodeObject(from: configData) as? AppConfigProtocol
             else {
             return AppConfig.defaultConfig
         }
@@ -70,12 +70,12 @@ extension AppConfig {
 }
 
 //MARK:- encoding/decoding object from data
-extension AppConfig {
-    private func encodeObject() throws -> Data? {
+extension AppConfig: ObjectEncoderProtocol {
+    internal func encodeObject() throws -> Data? {
         return try PropertyListEncoder().encode(self)
     }
     
-    private static func decodeObject(from data: Data) throws -> AppConfig {
+    internal static func decodeObject(from data: Data) throws -> ObjectEncoderProtocol {
         return try PropertyListDecoder().decode(AppConfig.self, from: data)
     }
 }

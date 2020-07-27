@@ -9,7 +9,7 @@
 import Cocoa
 import Carbon
 
-class MenuProvider: EventListenerProtocol {
+final class MenuProvider: EventListenerProtocol {
     private let dataProvider: DataRepositoryProtocol
     internal var monitor: Any?
     

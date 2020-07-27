@@ -24,13 +24,13 @@ extension AppPreferences {
     private static let appConfig = try? AppConfig.readConfigFile()
     
     static var getMaxClipboardSize: Int = {
-        guard let maxClipboardSize = AppPreferences.appConfig?.maxClipboardSize else {
+        guard let maxClipboardSize = (AppPreferences.appConfig as? AppConfig)?.maxClipboardSize else {
             return AppPreferences.maxClipboardSize
         }
         return maxClipboardSize
     }()
     static var getMaxDataSize: Int = {
-        guard let maxDataSize = AppPreferences.appConfig?.maxDataSize else {
+        guard let maxDataSize = (AppPreferences.appConfig as? AppConfig)?.maxDataSize else {
             return AppPreferences.maxDataSize
         }
         return maxDataSize
