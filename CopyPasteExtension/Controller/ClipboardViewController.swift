@@ -22,7 +22,7 @@ class ClipboardViewController: NSViewController {
         let repository = ClipboardRepository(defaults: UserDefaults(suiteName: AppPreferences.userDefaultsFilename))
         dataProvider = repository
         menuProvider = MenuProvider(dataProvider: repository)
-        let x = AppPreferences.getMaxDataSize
+        
         setupTable()
         NSSound.beep()
     }

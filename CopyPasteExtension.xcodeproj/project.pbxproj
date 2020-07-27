@@ -40,6 +40,9 @@
 		F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2047FFE24B0DD78000381D7 /* DataModel.swift */; };
 		F2D86E6E24BF8E3400A2E6C6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */; };
 		F2D86E7024BF9EA400A2E6C6 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */; };
+		F2FCAE1124CD8C50004C43B7 /* SupportFilesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCAE1024CD8C50004C43B7 /* SupportFilesSpec.swift */; };
+		F2FCAE1224CD8C82004C43B7 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A626A24CC5AC600BA73AA /* AppConfig.swift */; };
+		F2FCAE1424CD8CA4004C43B7 /* MockFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCAE1324CD8CA4004C43B7 /* MockFileManager.swift */; };
 		F2FFC13124C5F5A2006D19DE /* MockStatusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -99,6 +102,8 @@
 		F2D278FD24AFC5A700C0C63F /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 		F2D2790024AFCA3F00C0C63F /* ClipboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardRepository.swift; sourceTree = "<group>"; };
 		F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
+		F2FCAE1024CD8C50004C43B7 /* SupportFilesSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFilesSpec.swift; sourceTree = "<group>"; };
+		F2FCAE1324CD8CA4004C43B7 /* MockFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFileManager.swift; sourceTree = "<group>"; };
 		F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStatusProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,6 +155,7 @@
 				F27F97F624C4C382001F904A /* MockNSTableView.swift */,
 				F27F97F824C4C544001F904A /* MockNSEvent.swift */,
 				F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */,
+				F2FCAE1324CD8CA4004C43B7 /* MockFileManager.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -228,6 +234,7 @@
 				F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */,
 				F2AE231F24C208E600B3B698 /* UtilitySpec.swift */,
 				F2AE232424C2145900B3B698 /* ViewControllerSpec.swift */,
+				F2FCAE1024CD8C50004C43B7 /* SupportFilesSpec.swift */,
 			);
 			path = CopyPasteExtensionTests;
 			sourceTree = "<group>";
@@ -429,14 +436,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2AE231E24C0D17500B3B698 /* AppPreferences.swift in Sources */,
+				F2FCAE1224CD8C82004C43B7 /* AppConfig.swift in Sources */,
 				F2D86E6E24BF8E3400A2E6C6 /* Extensions.swift in Sources */,
 				F2D86E7024BF9EA400A2E6C6 /* ModelSpec.swift in Sources */,
+				F2FCAE1424CD8CA4004C43B7 /* MockFileManager.swift in Sources */,
 				F2AE232524C2145900B3B698 /* ViewControllerSpec.swift in Sources */,
 				F2AE231C24C0A6EC00B3B698 /* MockUserDefaults.swift in Sources */,
 				F2AE232024C208E600B3B698 /* UtilitySpec.swift in Sources */,
 				F2AE232124C20A1E00B3B698 /* MenuProvider.swift in Sources */,
 				F27F97F924C4C544001F904A /* MockNSEvent.swift in Sources */,
 				F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */,
+				F2FCAE1124CD8C50004C43B7 /* SupportFilesSpec.swift in Sources */,
 				F2FFC13124C5F5A2006D19DE /* MockStatusProtocol.swift in Sources */,
 				F2AE232B24C2169400B3B698 /* MockEventListener.swift in Sources */,
 				F2B805C624C7533600E192F5 /* DataRepositoryProtocol.swift in Sources */,

@@ -39,7 +39,7 @@ class AppConfig: Codable {
 extension AppConfig {
     private static let fileExtension = "plist"
     
-    static func readConfigFile() throws -> AppConfig {
+    static func readConfigFile(fileManager: FileManager = FileManager.default) throws -> AppConfig {
         guard let filename = AppPreferences.configFile.appendingPathExtension(fileExtension) else {
             throw AppConfigError.invalidFilename
         }
@@ -48,8 +48,8 @@ extension AppConfig {
         let path = applicationSupportDirectory.appendingPathComponent(filename)
         let pathURL = URL(fileURLWithPath: path)
         
-        guard FileManager.default.fileExists(atPath: path) else {
-            FileManager.default.createFile(atPath: path, contents: nil)
+        guard fileManager.fileExists(atPath: path) else {
+            fileManager.createFile(atPath: path, contents: nil)
             
             let configObject = AppConfig.defaultConfig
             if let configData = try? configObject.encodeObject() {
