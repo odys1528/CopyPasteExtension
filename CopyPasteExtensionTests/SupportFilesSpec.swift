@@ -11,8 +11,6 @@ import Nimble
 
 class SupportFilesSpec: QuickSpec {
     override func spec() {
-        //file not exists - file is created, object is returned
-        //file extsts - file is not created, object is returned
         describe("the app config") {
             context("read config") {
                 let mockedFileManager = MockFileManager()

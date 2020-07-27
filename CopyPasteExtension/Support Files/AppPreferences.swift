@@ -11,11 +11,15 @@ struct AppPreferences {
     static let menuLabel = "CLIPBOARD"
     static let configFile = "cpe-config"
     static let dataKeyBase = "copypaste"
-    
+}
+
+//MARK:- default config values
+extension AppPreferences {
     static let maxClipboardSize = 5
     static let maxDataSize = 50
 }
 
+//MARK:- app config data
 extension AppPreferences {
     private static let appConfig = try? AppConfig.readConfigFile()
     
