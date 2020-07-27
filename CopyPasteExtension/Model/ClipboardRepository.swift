@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ClipboardRepository {
+final class ClipboardRepository {
     let defaults: UserDefaults?
     
     init(defaults: UserDefaults?) {
@@ -59,11 +59,11 @@ extension ClipboardRepository {
                 return id
             }
         }
-        return AppPreferences.maxClipboardSize
+        return AppPreferences.getMaxClipboardSize
     }
     
     private var idRange: ClosedRange<Int> {
-        return 1...AppPreferences.maxClipboardSize
+        return 1...AppPreferences.getMaxClipboardSize
     }
 }
 

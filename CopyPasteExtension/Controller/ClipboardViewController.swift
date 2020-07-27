@@ -51,7 +51,7 @@ class ClipboardViewController: NSViewController {
 //MARK:- NSTableViewDelegate
 extension ClipboardViewController: NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
-        guard row < AppPreferences.maxClipboardSize else {
+        guard row < AppPreferences.getMaxClipboardSize else {
             return nil
         }
         
@@ -84,7 +84,7 @@ extension ClipboardViewController: NSTableViewDataSource {
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
-        return AppPreferences.maxClipboardSize
+        return AppPreferences.getMaxClipboardSize
     }
     
     func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
@@ -96,12 +96,12 @@ extension ClipboardViewController: NSTableViewDataSource {
 extension ClipboardViewController: NSTextFieldDelegate {
     func controlTextDidEndEditing(_ notification: Notification) {
         let selectedRow = dataTableView.selectedRow
-        guard selectedRow.inRange(from: 0, to: AppPreferences.maxClipboardSize),
+        guard selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
             let newData = (notification.object as? NSTextField)?.stringValue else {
             return
         }
         
-        let data = newData.trim(maxLength: AppPreferences.maxDataSize)
+        let data = newData.trim(maxLength: AppPreferences.getMaxDataSize)
         let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
         cellView?.textField?.stringValue = data
         
@@ -130,7 +130,7 @@ extension ClipboardViewController {
         let selectedRow = dataTableView.selectedRow
         
         guard event.keyCode == kVK_Delete,
-            selectedRow.inRange(from: 0, to: AppPreferences.maxClipboardSize),
+            selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
             let dataModel = data.itemOrNil(index: selectedRow)
             else {
             return

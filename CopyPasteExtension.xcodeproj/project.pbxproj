@@ -10,6 +10,7 @@
 		450C421F4C01F10DF2F8D359 /* Pods_CopyPasteExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 84960EB6550371BC81EB8045 /* Pods_CopyPasteExtension.framework */; };
 		9574256EB4831F7897F366BD /* Pods_CopyPasteExtensionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE0561DBD4AEA7BEAB7DB1F /* Pods_CopyPasteExtensionTests.framework */; };
 		F2047FFF24B0DD78000381D7 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2047FFE24B0DD78000381D7 /* DataModel.swift */; };
+		F23A626B24CC5AC600BA73AA /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A626A24CC5AC600BA73AA /* AppConfig.swift */; };
 		F27F97F724C4C382001F904A /* MockNSTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27F97F624C4C382001F904A /* MockNSTableView.swift */; };
 		F27F97F924C4C544001F904A /* MockNSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27F97F824C4C544001F904A /* MockNSEvent.swift */; };
 		F27F97FA24C4C7E1001F904A /* CellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */; };
@@ -39,6 +40,13 @@
 		F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2047FFE24B0DD78000381D7 /* DataModel.swift */; };
 		F2D86E6E24BF8E3400A2E6C6 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */; };
 		F2D86E7024BF9EA400A2E6C6 /* ModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */; };
+		F2FCAE1124CD8C50004C43B7 /* SupportFilesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCAE1024CD8C50004C43B7 /* SupportFilesSpec.swift */; };
+		F2FCAE1224CD8C82004C43B7 /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A626A24CC5AC600BA73AA /* AppConfig.swift */; };
+		F2FCAE1424CD8CA4004C43B7 /* MockFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCAE1324CD8CA4004C43B7 /* MockFileManager.swift */; };
+		F2FCAE1624CF4FA8004C43B7 /* AppConfigProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCAE1524CF4FA8004C43B7 /* AppConfigProtocol.swift */; };
+		F2FCAE1824CF5017004C43B7 /* ObjectEncoderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCAE1724CF5017004C43B7 /* ObjectEncoderProtocol.swift */; };
+		F2FCAE1924CF51CE004C43B7 /* AppConfigProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCAE1524CF4FA8004C43B7 /* AppConfigProtocol.swift */; };
+		F2FCAE1A24CF51D3004C43B7 /* ObjectEncoderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FCAE1724CF5017004C43B7 /* ObjectEncoderProtocol.swift */; };
 		F2FFC13124C5F5A2006D19DE /* MockStatusProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,6 +81,7 @@
 		84960EB6550371BC81EB8045 /* Pods_CopyPasteExtension.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CopyPasteExtension.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		ECE0561DBD4AEA7BEAB7DB1F /* Pods_CopyPasteExtensionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CopyPasteExtensionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2047FFE24B0DD78000381D7 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
+		F23A626A24CC5AC600BA73AA /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
 		F27F97F624C4C382001F904A /* MockNSTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNSTableView.swift; sourceTree = "<group>"; };
 		F27F97F824C4C544001F904A /* MockNSEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNSEvent.swift; sourceTree = "<group>"; };
 		F284B7EA24B8DBA80014B7FA /* MenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuProvider.swift; sourceTree = "<group>"; };
@@ -97,6 +106,10 @@
 		F2D278FD24AFC5A700C0C63F /* AppPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppPreferences.swift; sourceTree = "<group>"; };
 		F2D2790024AFCA3F00C0C63F /* ClipboardRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClipboardRepository.swift; sourceTree = "<group>"; };
 		F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSpec.swift; sourceTree = "<group>"; };
+		F2FCAE1024CD8C50004C43B7 /* SupportFilesSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFilesSpec.swift; sourceTree = "<group>"; };
+		F2FCAE1324CD8CA4004C43B7 /* MockFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockFileManager.swift; sourceTree = "<group>"; };
+		F2FCAE1524CF4FA8004C43B7 /* AppConfigProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfigProtocol.swift; sourceTree = "<group>"; };
+		F2FCAE1724CF5017004C43B7 /* ObjectEncoderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectEncoderProtocol.swift; sourceTree = "<group>"; };
 		F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockStatusProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -148,6 +161,7 @@
 				F27F97F624C4C382001F904A /* MockNSTableView.swift */,
 				F27F97F824C4C544001F904A /* MockNSEvent.swift */,
 				F2FFC13024C5F5A2006D19DE /* MockStatusProtocol.swift */,
+				F2FCAE1324CD8CA4004C43B7 /* MockFileManager.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -157,6 +171,9 @@
 			children = (
 				F2D0B58324BF7BCE0044A1A2 /* Extensions.swift */,
 				F2D278FD24AFC5A700C0C63F /* AppPreferences.swift */,
+				F23A626A24CC5AC600BA73AA /* AppConfig.swift */,
+				F2FCAE1524CF4FA8004C43B7 /* AppConfigProtocol.swift */,
+				F2FCAE1724CF5017004C43B7 /* ObjectEncoderProtocol.swift */,
 			);
 			path = "Support Files";
 			sourceTree = "<group>";
@@ -225,6 +242,7 @@
 				F2D86E6F24BF9EA400A2E6C6 /* ModelSpec.swift */,
 				F2AE231F24C208E600B3B698 /* UtilitySpec.swift */,
 				F2AE232424C2145900B3B698 /* ViewControllerSpec.swift */,
+				F2FCAE1024CD8C50004C43B7 /* SupportFilesSpec.swift */,
 			);
 			path = CopyPasteExtensionTests;
 			sourceTree = "<group>";
@@ -287,7 +305,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1130;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = Yolo;
 				TargetAttributes = {
 					F2D278CA24AFB4C200C0C63F = {
@@ -407,14 +425,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2047FFF24B0DD78000381D7 /* DataModel.swift in Sources */,
+				F2FCAE1824CF5017004C43B7 /* ObjectEncoderProtocol.swift in Sources */,
 				F2B805C524C7513E00E192F5 /* DataRepositoryProtocol.swift in Sources */,
 				F2AE232824C2159700B3B698 /* EventListenerProtocol.swift in Sources */,
 				F2D2790124AFCA3F00C0C63F /* ClipboardRepository.swift in Sources */,
 				F2D0B58224BF7A750044A1A2 /* CellIdentifier.swift in Sources */,
+				F2FCAE1624CF4FA8004C43B7 /* AppConfigProtocol.swift in Sources */,
 				F2D0B58424BF7BCE0044A1A2 /* Extensions.swift in Sources */,
 				F2D278FE24AFC5A700C0C63F /* AppPreferences.swift in Sources */,
 				F284B7EB24B8DBA80014B7FA /* MenuProvider.swift in Sources */,
 				F2B805C824C7549A00E192F5 /* DataModelProtocol.swift in Sources */,
+				F23A626B24CC5AC600BA73AA /* AppConfig.swift in Sources */,
 				F2D278D124AFB4C200C0C63F /* ClipboardViewController.swift in Sources */,
 				F2D278CF24AFB4C200C0C63F /* AppDelegate.swift in Sources */,
 			);
@@ -425,18 +446,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				F2AE231E24C0D17500B3B698 /* AppPreferences.swift in Sources */,
+				F2FCAE1924CF51CE004C43B7 /* AppConfigProtocol.swift in Sources */,
+				F2FCAE1224CD8C82004C43B7 /* AppConfig.swift in Sources */,
 				F2D86E6E24BF8E3400A2E6C6 /* Extensions.swift in Sources */,
 				F2D86E7024BF9EA400A2E6C6 /* ModelSpec.swift in Sources */,
+				F2FCAE1424CD8CA4004C43B7 /* MockFileManager.swift in Sources */,
 				F2AE232524C2145900B3B698 /* ViewControllerSpec.swift in Sources */,
 				F2AE231C24C0A6EC00B3B698 /* MockUserDefaults.swift in Sources */,
 				F2AE232024C208E600B3B698 /* UtilitySpec.swift in Sources */,
 				F2AE232124C20A1E00B3B698 /* MenuProvider.swift in Sources */,
 				F27F97F924C4C544001F904A /* MockNSEvent.swift in Sources */,
 				F2D86E6D24BF8D8200A2E6C6 /* DataModel.swift in Sources */,
+				F2FCAE1124CD8C50004C43B7 /* SupportFilesSpec.swift in Sources */,
 				F2FFC13124C5F5A2006D19DE /* MockStatusProtocol.swift in Sources */,
 				F2AE232B24C2169400B3B698 /* MockEventListener.swift in Sources */,
 				F2B805C624C7533600E192F5 /* DataRepositoryProtocol.swift in Sources */,
 				F27F97FA24C4C7E1001F904A /* CellIdentifier.swift in Sources */,
+				F2FCAE1A24CF51D3004C43B7 /* ObjectEncoderProtocol.swift in Sources */,
 				F2B805C924C7599F00E192F5 /* DataModelProtocol.swift in Sources */,
 				F2AE231D24C0CBFF00B3B698 /* ClipboardRepository.swift in Sources */,
 				F27F97F724C4C382001F904A /* MockNSTableView.swift in Sources */,
@@ -587,6 +613,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CopyPasteExtension/CopyPasteExtension.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 22A9SU6778;
@@ -611,6 +638,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = CopyPasteExtension/CopyPasteExtension.entitlements;
+				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 22A9SU6778;

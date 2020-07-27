@@ -223,7 +223,6 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="closeButton" destination="tQY-vJ-stp" id="el5-CZ-4u1"/>
                         <outlet property="dataTableView" destination="PEQ-JK-gFH" id="Bw2-eg-pG2"/>
                     </connections>
                 </viewController>

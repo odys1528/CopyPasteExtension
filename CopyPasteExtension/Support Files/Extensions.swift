@@ -32,6 +32,14 @@ extension String {
     func trim(maxLength: Int) -> String {
         return String(self.prefix(maxLength))
     }
+    
+    func appendingPathExtension(_ str: String) -> String? {
+        return (self as NSString).appendingPathExtension(str)
+    }
+    
+    func appendingPathComponent(_ str: String) -> String {
+        return (self as NSString).appendingPathComponent(str)
+    }
 }
 
 extension Int {
@@ -43,5 +51,11 @@ extension Int {
 extension Array {
     func itemOrNil(index: Int) -> Element? {
         return index < self.count ? self[index] : nil
+    }
+}
+
+extension FileManager {
+    static var applicationSupportDirectory: String {
+        return NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0] as String
     }
 }

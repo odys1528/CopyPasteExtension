@@ -9,7 +9,7 @@
 import Cocoa
 import Carbon
 
-class MenuProvider: EventListenerProtocol {
+final class MenuProvider: EventListenerProtocol {
     private let dataProvider: DataRepositoryProtocol
     internal var monitor: Any?
     
@@ -38,7 +38,6 @@ class MenuProvider: EventListenerProtocol {
     
     internal func createMenu() -> NSMenu {
         let clipboardMenu = NSMenu(title: AppPreferences.menuLabel)
-        clipboardMenu.addItem(NSMenuItem.separator())
         let labelItem = NSMenuItem.labelMenuItem(title: AppPreferences.menuLabel)
         clipboardMenu.addItem(labelItem)
         
@@ -47,7 +46,6 @@ class MenuProvider: EventListenerProtocol {
             menuItem.target = self
             clipboardMenu.addItem(menuItem)
         }
-        clipboardMenu.addItem(NSMenuItem.separator())
         
         return clipboardMenu
     }
