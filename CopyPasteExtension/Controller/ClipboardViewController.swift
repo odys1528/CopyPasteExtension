@@ -97,7 +97,7 @@ extension ClipboardViewController: NSTableViewDataSource {
 extension ClipboardViewController: NSTextFieldDelegate {
     func controlTextDidBeginEditing(_ obj: Notification) {
         let selectedRow = dataTableView.selectedRow
-        guard let data = (obj.object as? NSTextField)?.stringValue, selectedRow > 0 else {
+        guard let data = (obj.object as? NSTextField)?.stringValue, selectedRow >= 0 else {
             return
         }
         
