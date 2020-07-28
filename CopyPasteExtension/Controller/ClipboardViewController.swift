@@ -160,9 +160,17 @@ extension ClipboardViewController {
             return
         }
         
-        dataTableView.removeRows(at: IndexSet(integer: selectedRow), withAnimation: .effectFade)
-        try? (dataProvider as? ClipboardRepository)?.removeData(withId: dataModel.id)
+        guard let _ = try? (dataProvider as? ClipboardRepository)?.removeData(withId: dataModel.id) else {
+            return
+        }
         refreshData()
+        
+        dataTableView.beginUpdates()
+        let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
+        cellView?.textField?.stringValue = ""
+        cellView?.objectValue = nil
+        dataTableView.moveRow(at: selectedRow, to: AppPreferences.getMaxClipboardSize-1)
+        dataTableView.endUpdates()
     }
     
     private func refreshData() {
