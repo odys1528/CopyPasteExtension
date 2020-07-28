@@ -84,6 +84,22 @@ class ViewControllerSpec: QuickSpec {
                         viewController.controlTextDidEndEditing(notification)
                         expect(viewController.data as? [DataModel]) == prevoiusData
                     }
+                    
+                    it("cached data") {
+                        viewController.dataProvider = ClipboardRepository(defaults: mockDefaults)
+                        mockNSTableView.mockSelectedRow = 0
+                        let textField = NSTextField()
+                        textField.stringValue = "nana"
+                        notification.object = textField
+                        viewController.controlTextDidBeginEditing(notification)
+                        
+                        textField.stringValue = ""
+                        notification.object = textField
+                        
+                        viewController.controlTextDidEndEditing(notification)
+                        expect(viewController.data as? [DataModel]) == prevoiusData
+                        expect(viewController.cache[0]) == "nana"
+                    }
                 }
                 
                 describe("non empty data") {
