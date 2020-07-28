@@ -187,7 +187,7 @@ class ViewControllerSpec: QuickSpec {
                     }
 
                     viewController.keyDown(with: keyEvent)
-                    expect(mockNSTableView.getStatus()) == .removed
+                    expect(mockNSTableView.getStatus()) == .moved
                     expect(mockDefaults.getStatus()) == .removed
                 }
 

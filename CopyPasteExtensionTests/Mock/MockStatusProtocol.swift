@@ -16,4 +16,5 @@ enum MockStatus {
     case removed
     case added
     case created
+    case moved
 }

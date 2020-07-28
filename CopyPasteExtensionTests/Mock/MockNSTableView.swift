@@ -18,6 +18,14 @@ class MockNSTableView: NSTableView {
     override func removeRows(at indexes: IndexSet, withAnimation animationOptions: NSTableView.AnimationOptions = []) {
         status = .removed
     }
+    
+    override func moveRow(at oldIndex: Int, to newIndex: Int) {
+        status = .moved
+    }
+    
+    override func view(atColumn column: Int, row: Int, makeIfNecessary: Bool) -> NSView? {
+        return nil
+    }
 }
 
 //MARK:- MockStatusProtocol protocol
