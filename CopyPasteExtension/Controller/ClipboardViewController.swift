@@ -12,6 +12,7 @@ import Carbon
 class ClipboardViewController: NSViewController {
     @IBOutlet weak var dataTableView: NSTableView!
     var data: [DataModelProtocol] = []
+    private var cache: [Int: String] = [:]
     
     internal var dataProvider: DataRepositoryProtocol? = nil
     internal var menuProvider: EventListenerProtocol? = nil
@@ -94,6 +95,15 @@ extension ClipboardViewController: NSTableViewDataSource {
 
 //MARK:- NSTextFieldDelegate
 extension ClipboardViewController: NSTextFieldDelegate {
+    func controlTextDidBeginEditing(_ obj: Notification) {
+        let selectedRow = dataTableView.selectedRow
+        guard let data = (obj.object as? NSTextField)?.stringValue, selectedRow > 0 else {
+            return
+        }
+        
+        cache[selectedRow] = data
+    }
+    
     func controlTextDidEndEditing(_ notification: Notification) {
         let selectedRow = dataTableView.selectedRow
         guard selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
@@ -106,6 +116,13 @@ extension ClipboardViewController: NSTextFieldDelegate {
         cellView?.textField?.stringValue = data
         
         guard let dataModel = cellView?.objectValue as? DataModel else {
+            guard newData.count > 0 else {
+                if let cached = cache[selectedRow] {
+                    cellView?.textField?.stringValue = cached
+                }
+                return
+            }
+            
             guard let itemId = try? (dataProvider as? ClipboardRepository)?.setData(withItemData: data) else {
                 return
             }
@@ -114,6 +131,13 @@ extension ClipboardViewController: NSTextFieldDelegate {
             cellView?.objectValue = updatedDataModel
             
             refreshData()
+            return
+        }
+        
+        guard newData.count > 0 else {
+            if let cached = cache[selectedRow] {
+                cellView?.textField?.stringValue = cached
+            }
             return
         }
         

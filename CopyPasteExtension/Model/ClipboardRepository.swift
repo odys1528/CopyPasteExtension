@@ -97,17 +97,20 @@ extension ClipboardRepository: DataRepositoryProtocol {
             throw DataProviderError.idOutOfRange
         }
         
-        let data = defaults?.string(forKey: ClipboardRepository.dataId(withId: itemId))
-        if let data = data {
-            return DataModel(id: itemId, data: data)
+        guard let data = defaults?.string(forKey: ClipboardRepository.dataId(withId: itemId)) else {
+            throw DataProviderError.noDataWithId
         }
-        throw DataProviderError.noDataWithId
+        return DataModel(id: itemId, data: data)
     }
     
     func setData(item: DataModelProtocol) throws {
         let itemId: Int! = item.id
         guard idRange ~= itemId else {
             throw DataProviderError.idOutOfRange
+        }
+        
+        guard item.data.count > 0 else {
+            throw DataProviderError.noDataWithId
         }
         
         defaults?.setValue(item.data, forKey: ClipboardRepository.dataId(withId: itemId))
