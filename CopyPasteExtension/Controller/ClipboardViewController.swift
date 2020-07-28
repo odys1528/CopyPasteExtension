@@ -155,7 +155,7 @@ extension ClipboardViewController {
         
         guard event.keyCode == kVK_Delete,
             selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
-            let dataModel = data.itemOrNil(index: selectedRow)
+            let dataModel = cellView?.objectValue as? DataModel
             else {
             return
         }
