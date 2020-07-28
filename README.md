@@ -11,7 +11,7 @@ This app means to be an extension of a standard copy-paste functionality. With a
 ## Feature plans
 - [ ] add data to paste list via simple copying
 - [ ] option to choose between window-based view and bar-widget view
-- [ ] general app settings overwritten by a separate config file
+- [x] general app settings overwritten by a separate config file
 
 :star: also regular code updates and cleanup :bowtie:
 
