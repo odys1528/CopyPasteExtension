@@ -79,9 +79,9 @@ extension ClipboardViewController: NSTableViewDelegate {
 //MARK:- NSTableViewDataSource
 extension ClipboardViewController: NSTableViewDataSource {
     private func setupTable() {
+        refreshData()
         dataTableView.delegate = self
         dataTableView.dataSource = self
-        refreshData()
     }
     
     private func refreshData() {
@@ -179,16 +179,22 @@ extension ClipboardViewController {
         }
         cache[selectedRow] = nil
         
-        dataTableView.beginUpdates()
-        cellView?.setText("")
-        cellView?.setObject(nil)
-        dataTableView.recycleRow()
-        dataTableView.endUpdates()
+        dataTableView.update {
+            cellView?.setText("")
+            cellView?.setObject(nil)
+            dataTableView.recycleRow()
+        }
     }
 }
 
 //MARK:- NSTableView extension
 private extension NSTableView {
+    func update(action: () -> ()) {
+        self.beginUpdates()
+        action()
+        self.endUpdates()
+    }
+    
     func cellView(cellIdentifier: CellIdentifier) -> NSTableCellView? {
         return view(atColumn: column(withIdentifier: cellIdentifier.identifier.itemIdentifier), row: cellIdentifier.row, makeIfNecessary: false) as? NSTableCellView
     }
@@ -214,6 +220,7 @@ private extension NSTableView {
     }
 }
 
+//MARK:- NSTableCellView extension
 private extension NSTableCellView {
     func setText(_ text: String?) {
         guard let text = text else {
