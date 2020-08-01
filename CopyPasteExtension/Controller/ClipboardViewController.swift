@@ -87,10 +87,6 @@ extension ClipboardViewController: NSTableViewDataSource {
     func numberOfRows(in tableView: NSTableView) -> Int {
         return AppPreferences.getMaxClipboardSize
     }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return data.itemOrNil(index: row)
-    }
 }
 
 //MARK:- NSTextFieldDelegate
@@ -127,10 +123,10 @@ extension ClipboardViewController: NSTextFieldDelegate {
                 return
             }
             
-            let updatedDataModel = DataModel(id: itemId, data: data)
-            cellView?.objectValue = updatedDataModel
+            let newDataModel = DataModel(id: itemId, data: data)
+            cellView?.objectValue = newDataModel
+            self.data.append(newDataModel)
             
-            refreshData()
             return
         }
         
@@ -143,8 +139,20 @@ extension ClipboardViewController: NSTextFieldDelegate {
         
         let updatedDataModel = DataModel(id: dataModel.id, data: data)
         cellView?.objectValue = updatedDataModel
-        try? dataProvider?.setData(item: updatedDataModel)
-        refreshData()
+        guard let _ = try? dataProvider?.setData(item: updatedDataModel) else {
+            if let cached = cache[selectedRow] {
+                cellView?.textField?.stringValue = cached
+            }
+            return
+        }
+        
+        let index = self.data.firstIndex {
+            $0.id == updatedDataModel.id
+        }
+        guard let validIndex = index else {
+            return
+        }
+        self.data[validIndex] = updatedDataModel
     }
 }
 
@@ -152,6 +160,7 @@ extension ClipboardViewController: NSTextFieldDelegate {
 extension ClipboardViewController {
     override func keyDown(with event: NSEvent) {
         let selectedRow = dataTableView.selectedRow
+        let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
         
         guard event.keyCode == kVK_Delete,
             selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
@@ -163,10 +172,13 @@ extension ClipboardViewController {
         guard let _ = try? (dataProvider as? ClipboardRepository)?.removeData(withId: dataModel.id) else {
             return
         }
-        refreshData()
+        
+        data = data.filter {
+            $0.id != dataModel.id
+        }
+        cache[selectedRow] = nil
         
         dataTableView.beginUpdates()
-        let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
         cellView?.textField?.stringValue = ""
         cellView?.objectValue = nil
         dataTableView.moveRow(at: selectedRow, to: AppPreferences.getMaxClipboardSize-1)
