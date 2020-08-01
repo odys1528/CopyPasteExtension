@@ -84,6 +84,13 @@ extension ClipboardViewController: NSTableViewDataSource {
         refreshData()
     }
     
+    private func refreshData() {
+        guard let allData = try? dataProvider?.allData() else {
+            return
+        }
+        data = allData
+    }
+    
     func numberOfRows(in tableView: NSTableView) -> Int {
         return AppPreferences.getMaxClipboardSize
     }
@@ -109,13 +116,11 @@ extension ClipboardViewController: NSTextFieldDelegate {
         
         let data = newData.trim(maxLength: AppPreferences.getMaxDataSize)
         let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
-        cellView?.textField?.stringValue = data
+        cellView?.setText(data)
         
         guard let dataModel = cellView?.objectValue as? DataModel else {
             guard newData.count > 0 else {
-                if let cached = cache[selectedRow] {
-                    cellView?.textField?.stringValue = cached
-                }
+                cellView?.setText(cache[selectedRow])
                 return
             }
             
@@ -124,25 +129,21 @@ extension ClipboardViewController: NSTextFieldDelegate {
             }
             
             let newDataModel = DataModel(id: itemId, data: data)
-            cellView?.objectValue = newDataModel
+            cellView?.setObject(newDataModel)
             self.data.append(newDataModel)
             
             return
         }
         
         guard newData.count > 0 else {
-            if let cached = cache[selectedRow] {
-                cellView?.textField?.stringValue = cached
-            }
+            cellView?.setText(cache[selectedRow])
             return
         }
         
         let updatedDataModel = DataModel(id: dataModel.id, data: data)
-        cellView?.objectValue = updatedDataModel
+        cellView?.setObject(updatedDataModel)
         guard let _ = try? dataProvider?.setData(item: updatedDataModel) else {
-            if let cached = cache[selectedRow] {
-                cellView?.textField?.stringValue = cached
-            }
+            cellView?.setText(cache[selectedRow])
             return
         }
         
@@ -179,28 +180,10 @@ extension ClipboardViewController {
         cache[selectedRow] = nil
         
         dataTableView.beginUpdates()
-        cellView?.textField?.stringValue = ""
-        cellView?.objectValue = nil
-        dataTableView.moveRow(at: selectedRow, to: nearestFreeCellId(start: selectedRow+1)-1)
+        cellView?.setText("")
+        cellView?.setObject(nil)
+        dataTableView.recycleRow()
         dataTableView.endUpdates()
-    }
-    
-    private func refreshData() {
-        guard let allData = try? dataProvider?.allData() else {
-            return
-        }
-        data = allData
-    }
-    
-    private func nearestFreeCellId(start: Int) -> Int {
-        for index in start...AppPreferences.getMaxClipboardSize-1 {
-            let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: index))
-            let objectValue = cellView?.objectValue as? DataModel
-            guard objectValue != nil else {
-                return index
-            }
-        }
-        return AppPreferences.getMaxClipboardSize-1
     }
 }
 
@@ -208,5 +191,38 @@ extension ClipboardViewController {
 private extension NSTableView {
     func cellView(cellIdentifier: CellIdentifier) -> NSTableCellView? {
         return view(atColumn: column(withIdentifier: cellIdentifier.identifier.itemIdentifier), row: cellIdentifier.row, makeIfNecessary: false) as? NSTableCellView
+    }
+    
+    func recycleRow(rowId: Int? = nil) {
+        guard let rowId = rowId else {
+            self.moveRow(at: selectedRow, to: nearestFreeRowId-1)
+            return
+        }
+        
+        self.moveRow(at: rowId, to: nearestFreeRowId-1)
+    }
+    
+    private var nearestFreeRowId: Int {
+        for index in selectedRow+1...numberOfRows-1 {
+            let cellView = self.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: index))
+            let objectValue = cellView?.objectValue as? DataModel
+            guard objectValue != nil else {
+                return index
+            }
+        }
+        return numberOfRows-1
+    }
+}
+
+private extension NSTableCellView {
+    func setText(_ text: String?) {
+        guard let text = text else {
+            return
+        }
+        self.textField?.stringValue = text
+    }
+    
+    func setObject(_ object: Any?) {
+        self.objectValue = object
     }
 }
