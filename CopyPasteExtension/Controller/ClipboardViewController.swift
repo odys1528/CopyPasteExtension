@@ -181,7 +181,7 @@ extension ClipboardViewController {
         dataTableView.beginUpdates()
         cellView?.textField?.stringValue = ""
         cellView?.objectValue = nil
-        dataTableView.moveRow(at: selectedRow, to: AppPreferences.getMaxClipboardSize-1)
+        dataTableView.moveRow(at: selectedRow, to: nearestFreeCellId(start: selectedRow+1)-1)
         dataTableView.endUpdates()
     }
     
@@ -190,6 +190,17 @@ extension ClipboardViewController {
             return
         }
         data = allData
+    }
+    
+    private func nearestFreeCellId(start: Int) -> Int {
+        for index in start...AppPreferences.getMaxClipboardSize-1 {
+            let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: index))
+            let objectValue = cellView?.objectValue as? DataModel
+            guard objectValue != nil else {
+                return index
+            }
+        }
+        return AppPreferences.getMaxClipboardSize-1
     }
 }
 
