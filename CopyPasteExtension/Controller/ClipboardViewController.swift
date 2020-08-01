@@ -79,17 +79,20 @@ extension ClipboardViewController: NSTableViewDelegate {
 //MARK:- NSTableViewDataSource
 extension ClipboardViewController: NSTableViewDataSource {
     private func setupTable() {
+        refreshData()
         dataTableView.delegate = self
         dataTableView.dataSource = self
-        refreshData()
+    }
+    
+    private func refreshData() {
+        guard let allData = try? dataProvider?.allData() else {
+            return
+        }
+        data = allData
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return AppPreferences.getMaxClipboardSize
-    }
-    
-    func tableView(_ tableView: NSTableView, objectValueFor tableColumn: NSTableColumn?, row: Int) -> Any? {
-        return data.itemOrNil(index: row)
     }
 }
 
@@ -113,13 +116,11 @@ extension ClipboardViewController: NSTextFieldDelegate {
         
         let data = newData.trim(maxLength: AppPreferences.getMaxDataSize)
         let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
-        cellView?.textField?.stringValue = data
+        cellView?.setText(data)
         
         guard let dataModel = cellView?.objectValue as? DataModel else {
             guard newData.count > 0 else {
-                if let cached = cache[selectedRow] {
-                    cellView?.textField?.stringValue = cached
-                }
+                cellView?.setText(cache[selectedRow])
                 return
             }
             
@@ -127,24 +128,32 @@ extension ClipboardViewController: NSTextFieldDelegate {
                 return
             }
             
-            let updatedDataModel = DataModel(id: itemId, data: data)
-            cellView?.objectValue = updatedDataModel
+            let newDataModel = DataModel(id: itemId, data: data)
+            cellView?.setObject(newDataModel)
+            self.data.append(newDataModel)
             
-            refreshData()
             return
         }
         
         guard newData.count > 0 else {
-            if let cached = cache[selectedRow] {
-                cellView?.textField?.stringValue = cached
-            }
+            cellView?.setText(cache[selectedRow])
             return
         }
         
         let updatedDataModel = DataModel(id: dataModel.id, data: data)
-        cellView?.objectValue = updatedDataModel
-        try? dataProvider?.setData(item: updatedDataModel)
-        refreshData()
+        cellView?.setObject(updatedDataModel)
+        guard let _ = try? dataProvider?.setData(item: updatedDataModel) else {
+            cellView?.setText(cache[selectedRow])
+            return
+        }
+        
+        let index = self.data.firstIndex {
+            $0.id == updatedDataModel.id
+        }
+        guard let validIndex = index else {
+            return
+        }
+        self.data[validIndex] = updatedDataModel
     }
 }
 
@@ -152,30 +161,75 @@ extension ClipboardViewController: NSTextFieldDelegate {
 extension ClipboardViewController {
     override func keyDown(with event: NSEvent) {
         let selectedRow = dataTableView.selectedRow
+        let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
         
         guard event.keyCode == kVK_Delete,
             selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
-            let dataModel = data.itemOrNil(index: selectedRow)
+            let dataModel = cellView?.objectValue as? DataModel
             else {
             return
         }
         
-        dataTableView.removeRows(at: IndexSet(integer: selectedRow), withAnimation: .effectFade)
-        try? (dataProvider as? ClipboardRepository)?.removeData(withId: dataModel.id)
-        refreshData()
-    }
-    
-    private func refreshData() {
-        guard let allData = try? dataProvider?.allData() else {
+        guard let _ = try? (dataProvider as? ClipboardRepository)?.removeData(withId: dataModel.id) else {
             return
         }
-        data = allData
+        
+        data = data.filter {
+            $0.id != dataModel.id
+        }
+        cache[selectedRow] = nil
+        
+        dataTableView.update {
+            cellView?.setText("")
+            cellView?.setObject(nil)
+            dataTableView.recycleRow()
+        }
     }
 }
 
 //MARK:- NSTableView extension
 private extension NSTableView {
+    func update(action: () -> ()) {
+        self.beginUpdates()
+        action()
+        self.endUpdates()
+    }
+    
     func cellView(cellIdentifier: CellIdentifier) -> NSTableCellView? {
         return view(atColumn: column(withIdentifier: cellIdentifier.identifier.itemIdentifier), row: cellIdentifier.row, makeIfNecessary: false) as? NSTableCellView
+    }
+    
+    func recycleRow(rowId: Int? = nil) {
+        guard let rowId = rowId else {
+            self.moveRow(at: selectedRow, to: nearestFreeRowId-1)
+            return
+        }
+        
+        self.moveRow(at: rowId, to: nearestFreeRowId-1)
+    }
+    
+    private var nearestFreeRowId: Int {
+        for index in selectedRow+1...numberOfRows-1 {
+            let cellView = self.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: index))
+            let objectValue = cellView?.objectValue as? DataModel
+            guard objectValue != nil else {
+                return index
+            }
+        }
+        return numberOfRows-1
+    }
+}
+
+//MARK:- NSTableCellView extension
+private extension NSTableCellView {
+    func setText(_ text: String?) {
+        guard let text = text else {
+            return
+        }
+        self.textField?.stringValue = text
+    }
+    
+    func setObject(_ object: Any?) {
+        self.objectValue = object
     }
 }
