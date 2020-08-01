@@ -100,6 +100,11 @@ class ViewControllerSpec: QuickSpec {
                         expect(viewController.data as? [DataModel]) == prevoiusData
                         expect(viewController.cache[0]) == "nana"
                     }
+                    
+                    it("cache not updated") {
+                        viewController.controlTextDidEndEditing(notification)
+                        expect(viewController.cache.count) == 0
+                    }
                 }
                 
                 describe("non empty data") {
@@ -185,6 +190,8 @@ class ViewControllerSpec: QuickSpec {
                         fail()
                         return
                     }
+                    mockNSTableView.mockCellObject = dataModel
+                    mockNSTableView.mockNumberOfRows = 2
 
                     viewController.keyDown(with: keyEvent)
                     expect(mockNSTableView.getStatus()) == .moved
