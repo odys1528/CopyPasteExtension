@@ -81,6 +81,8 @@ extension ClipboardViewController: NSTableViewDataSource {
         refreshData()
         dataTableView.delegate = self
         dataTableView.dataSource = self
+        
+        dataTableView.registerForDraggedTypes([.dataModelPasteboardType])
     }
     
     private func refreshData() {
@@ -92,6 +94,42 @@ extension ClipboardViewController: NSTableViewDataSource {
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return AppPreferences.getMaxClipboardSize
+    }
+    
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        guard
+            let dataModel = data.itemOrNil(index: row),
+            let id = dataModel?.id
+            else {
+            return nil
+        }
+        
+        let pasteboardItem = NSPasteboardItem()
+        pasteboardItem.setString("\(id)", forType: .dataModelPasteboardType)
+        return pasteboardItem
+    }
+    
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        return dropOperation == .above ? .move : []
+    }
+    
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+        guard
+            let item = info.draggingPasteboard.pasteboardItems?.first,
+            let id = item.string(forType: .dataModelPasteboardType),
+            let dataModel = data.first(where: { $0?.id == Int(id) }),
+            let originalRow = data.firstIndex(where: { $0?.id == dataModel?.id })
+            else {
+                return false
+        }
+
+        let newRow = originalRow < row ? row - 1 : row
+        tableView.update {
+            tableView.moveRow(at: originalRow, to: newRow)
+        }
+        data.swapAt(originalRow, newRow)
+
+        return true
     }
 }
 
@@ -236,8 +274,9 @@ private extension NSTableCellView {
         }
         self.textField?.stringValue = text
     }
-    
-    func setObject(_ object: Any?) {
-        self.objectValue = object
-    }
+}
+
+//MARK:-NSPasteboard.PasteboardType extension
+private extension NSPasteboard.PasteboardType {
+    static let dataModelPasteboardType = NSPasteboard.PasteboardType(rawValue: "com.odys1528.CopyPasteExtension.tableViewIndex")
 }
