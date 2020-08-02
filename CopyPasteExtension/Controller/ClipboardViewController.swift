@@ -11,7 +11,7 @@ import Carbon
 
 class ClipboardViewController: NSViewController {
     @IBOutlet weak var dataTableView: NSTableView!
-    var data: [DataModelProtocol] = []
+    var data: [DataModelProtocol?] = []
     var cache: [Int: String] = [:]
     
     internal var dataProvider: DataRepositoryProtocol? = nil
@@ -64,8 +64,7 @@ extension ClipboardViewController: NSTableViewDelegate {
             }
             
             cellView.textField?.delegate = self
-            cellView.objectValue = dataModel
-            if let data = dataModel?.data {
+            if let data = dataModel??.data {
                 cellView.textField?.stringValue = data
             }
             
@@ -123,7 +122,7 @@ extension ClipboardViewController: NSTextFieldDelegate {
         let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
         cellView?.setText(data)
         
-        guard let dataModel = cellView?.objectValue as? DataModel else {
+        guard let dataModel = self.data.itemOrNil(index: selectedRow) as? DataModel else {
             guard newData.count > 0 else {
                 cellView?.setText(cache[selectedRow])
                 return
@@ -134,8 +133,7 @@ extension ClipboardViewController: NSTextFieldDelegate {
             }
             
             let newDataModel = DataModel(id: itemId, data: data)
-            cellView?.setObject(newDataModel)
-            self.data.append(newDataModel)
+            self.data[selectedRow] = newDataModel
             
             return
         }
@@ -146,14 +144,15 @@ extension ClipboardViewController: NSTextFieldDelegate {
         }
         
         let updatedDataModel = DataModel(id: dataModel.id, data: data)
-        cellView?.setObject(updatedDataModel)
+        self.data[selectedRow] = updatedDataModel
+        
         guard let _ = try? dataProvider?.setData(item: updatedDataModel) else {
             cellView?.setText(cache[selectedRow])
             return
         }
         
         let index = self.data.firstIndex {
-            $0.id == updatedDataModel.id
+            $0?.id == updatedDataModel.id
         }
         guard let validIndex = index else {
             return
@@ -171,7 +170,7 @@ extension ClipboardViewController {
         guard
             event.keyCode == kVK_Delete,
             selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
-            let dataModel = cellView?.objectValue as? DataModel
+            let dataModel = data.itemOrNil(index: selectedRow) as? DataModel
             else {
             return
         }
@@ -187,7 +186,7 @@ extension ClipboardViewController {
         
         dataTableView.update {
             cellView?.setText("")
-            cellView?.setObject(nil)
+            data[selectedRow] = nil
             dataTableView.recycleRow()
         }
     }
@@ -217,8 +216,11 @@ private extension NSTableView {
     private var nearestFreeRowId: Int {
         for index in selectedRow+1...numberOfRows-1 {
             let cellView = self.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: index))
-            let objectValue = cellView?.objectValue as? DataModel
-            guard objectValue != nil else {
+            
+            guard
+                let objectValue = cellView?.textField?.stringValue,
+                !objectValue.isEmpty
+                else {
                 return index
             }
         }
