@@ -29,6 +29,22 @@ final class ClipboardRepository {
         defaults?.removeObject(forKey: ClipboardRepository.dataId(withId: itemId))
     }
     
+    func swapData(_ id1: Int, _ id2: Int) throws {
+        guard
+            idRange ~= id1,
+            idRange ~= id2
+            else {
+            throw DataProviderError.idOutOfRange
+        }
+        
+        let item1 = try getData(withItemId: id1)
+        let item2 = try getData(withItemId: id2)
+        let newItem1 = DataModel(id: id1, data: item2.data)
+        let newItem2 = DataModel(id: id2, data: item1.data)
+        
+        try setData(data: [newItem1, newItem2])
+    }
+    
     private func optimizeIds(data: [DataModel]) -> [DataModel] {
         var optimizedData = [DataModel]()
         data.enumerated().forEach { (index, element) in
@@ -38,8 +54,10 @@ final class ClipboardRepository {
         return optimizedData
     }
     
-    private func setData(data: [DataModelProtocol]) throws {
-        clearAllData()
+    private func setData(data: [DataModelProtocol], reset: Bool = false) throws {
+        if reset {
+            clearAllData()
+        }
         try data.forEach { dataModel in
             try setData(item: dataModel)
         }
@@ -87,7 +105,7 @@ extension ClipboardRepository: DataRepositoryProtocol {
         if sortedAllData == optimizedData {
             return sortedAllData
         } else {
-            try setData(data: optimizedData)
+            try setData(data: optimizedData, reset: true)
             return optimizedData
         }
     }

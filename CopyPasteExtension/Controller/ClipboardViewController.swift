@@ -117,8 +117,8 @@ extension ClipboardViewController: NSTableViewDataSource {
         guard
             let item = info.draggingPasteboard.pasteboardItems?.first,
             let id = item.string(forType: .dataModelPasteboardType),
-            let dataModel = data.first(where: { $0?.id == Int(id) }),
-            let originalRow = data.firstIndex(where: { $0?.id == dataModel?.id })
+            let originalDataModel = data.first(where: { $0?.id == Int(id) }),
+            let originalRow = data.firstIndex(where: { $0?.id == originalDataModel?.id })
             else {
                 return false
         }
@@ -127,7 +127,15 @@ extension ClipboardViewController: NSTableViewDataSource {
         tableView.update {
             tableView.moveRow(at: originalRow, to: newRow)
         }
-        data.swapAt(originalRow, newRow)
+        data.swap(originalRow, newRow)
+        
+        guard
+            let sourceId = originalDataModel?.id,
+            let destinationId = data.itemOrNil(index: newRow)??.id
+            else {
+            return false
+        }
+        try? (dataProvider as? ClipboardRepository)?.swapData(sourceId, destinationId)
 
         return true
     }
@@ -279,4 +287,14 @@ private extension NSTableCellView {
 //MARK:-NSPasteboard.PasteboardType extension
 private extension NSPasteboard.PasteboardType {
     static let dataModelPasteboardType = NSPasteboard.PasteboardType(rawValue: "com.odys1528.CopyPasteExtension.tableViewIndex")
+}
+
+//MARK:- Array of DataModelProtocol extension
+private extension Array where Element == DataModelProtocol? {
+    mutating func swap(_ firstIndex: Int, _ secondIndex: Int) {
+        let originalFirstItem = DataModel(id: self[secondIndex]?.id, data: self[firstIndex]?.data)
+        let originalSecondItem = DataModel(id: self[firstIndex]?.id, data: self[secondIndex]?.data)
+        self[firstIndex] = originalSecondItem
+        self[secondIndex] = originalFirstItem
+    }
 }
