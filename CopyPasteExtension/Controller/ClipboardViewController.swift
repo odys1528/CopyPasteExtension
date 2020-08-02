@@ -180,8 +180,8 @@ extension ClipboardViewController {
             return
         }
         
-        data = data.filter {
-            $0.id != dataModel.id
+        data.filtered {
+            $0?.id != dataModel.id
         }
         cache[selectedRow] = nil
         
