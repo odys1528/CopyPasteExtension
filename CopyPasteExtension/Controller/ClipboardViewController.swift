@@ -100,7 +100,10 @@ extension ClipboardViewController: NSTableViewDataSource {
 extension ClipboardViewController: NSTextFieldDelegate {
     func controlTextDidBeginEditing(_ obj: Notification) {
         let selectedRow = dataTableView.selectedRow
-        guard let data = (obj.object as? NSTextField)?.stringValue, selectedRow >= 0 else {
+        guard
+            let data = (obj.object as? NSTextField)?.stringValue,
+            selectedRow >= 0
+            else {
             return
         }
         
@@ -109,8 +112,10 @@ extension ClipboardViewController: NSTextFieldDelegate {
     
     func controlTextDidEndEditing(_ notification: Notification) {
         let selectedRow = dataTableView.selectedRow
-        guard selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
-            let newData = (notification.object as? NSTextField)?.stringValue else {
+        guard
+            selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
+            let newData = (notification.object as? NSTextField)?.stringValue
+            else {
             return
         }
         
@@ -163,7 +168,8 @@ extension ClipboardViewController {
         let selectedRow = dataTableView.selectedRow
         let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
         
-        guard event.keyCode == kVK_Delete,
+        guard
+            event.keyCode == kVK_Delete,
             selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
             let dataModel = cellView?.objectValue as? DataModel
             else {
