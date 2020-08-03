@@ -48,6 +48,7 @@ class ViewControllerSpec: QuickSpec {
                     beforeEach {
                         notification = Notification(name: Notification.Name("MockedNotification"))
                         viewController.data = [dataModel]
+                        viewController.cache = [:]
                         viewController.dataTableView = mockNSTableView
                         mockDefaults.mockedStringReturn = { key in
                             if key == ClipboardRepository.dataId(withId: dataModel.id) {
@@ -134,15 +135,14 @@ class ViewControllerSpec: QuickSpec {
                             }
                             return nil
                         }
-                        
+
                         let newData = "new data"
                         let textField = NSTextField()
                         textField.stringValue = newData
                         notification.object = textField
 
-                        let storedId = ClipboardRepository.dataId(withId: dataModel.id+1)
                         viewController.controlTextDidEndEditing(notification)
-                        expect(mockDefaults.dataSaved[storedId] as? String) == newData
+                        expect(viewController.data[0]?.data) == newData
                     }
 
                     it("trim data") {
@@ -152,16 +152,15 @@ class ViewControllerSpec: QuickSpec {
                             }
                             return nil
                         }
-                        
+
                         let newData = String.random(length: AppPreferences.maxDataSize+1)
                         let textField = NSTextField()
                         textField.stringValue = newData
                         notification.object = textField
 
-                        let storedId = ClipboardRepository.dataId(withId: dataModel.id+1)
                         viewController.controlTextDidEndEditing(notification)
-                        
-                        let dataSaved = mockDefaults.dataSaved[storedId] as? String
+
+                        let dataSaved = viewController.data[0]?.data
                         expect(dataSaved) !== newData
                         expect(dataSaved?.count) == AppPreferences.maxDataSize
                     }

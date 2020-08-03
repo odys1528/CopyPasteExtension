@@ -185,6 +185,56 @@ class ModelSpec: QuickSpec {
                         }.to(throwError())
                     }
                 }
+                
+                describe("swap data") {
+                    let mockDataModelArray = [
+                        DataModel(id: 1, data: "a"),
+                        DataModel(id: 2, data: "b"),
+                    ]
+                    
+                    beforeEach {
+                        mockDefaults.mockedStringReturn = { key in
+                            var resultData: String? = nil
+                            mockDataModelArray.forEach { mockDataModel in
+                                if key == ClipboardRepository.dataId(withId: mockDataModel.id) {
+                                    resultData = mockDataModel.data
+                                }
+                            }
+                            return resultData
+                        }
+                    }
+                    
+                    it("with correct id") {
+                        expect {
+                            try dataProvider.swapData(1, 2)
+                        }.notTo(throwError())
+                        
+                        let dataSaved = mockDefaults.dataSaved
+                        let mockDataModel1 = mockDataModelArray[0]
+                        let mockDataModel2 = mockDataModelArray[1]
+                        let key1 = ClipboardRepository.dataId(withId: mockDataModel1.id)
+                        let key2 = ClipboardRepository.dataId(withId: mockDataModel2.id)
+                        expect(mockDataModel1.data) == dataSaved[key2]
+                        expect(mockDataModel2.data) == dataSaved[key1]
+                    }
+                    
+                    it("with the same id") {
+                        expect {
+                            try dataProvider.swapData(1, 1)
+                        }.notTo(throwError())
+                        
+                        let dataSaved = mockDefaults.dataSaved
+                        let mockDataModel1 = mockDataModelArray[0]
+                        let key1 = ClipboardRepository.dataId(withId: mockDataModel1.id)
+                        expect(mockDataModel1.data) == dataSaved[key1]
+                    }
+                    
+                    it("with incorrect id") {
+                        expect {
+                            try dataProvider.swapData(1, AppPreferences.maxClipboardSize+1)
+                        }.to(throwError())
+                    }
+                }
             }
         }
     }
