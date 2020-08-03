@@ -124,19 +124,20 @@ extension ClipboardViewController: NSTableViewDataSource {
         }
 
         let newRow = originalRow < row ? row - 1 : row
-        tableView.update {
-            tableView.moveRow(at: originalRow, to: newRow)
-        }
-        data.swap(originalRow, newRow)
-        
+
         guard
             let sourceId = originalDataModel??.id,
             let destinationId = data[newRow]??.id
             else {
             return false
         }
+        
+        tableView.update {
+            tableView.moveRow(at: originalRow, to: newRow)
+        }
+        data.swap(originalRow, newRow)
         try? (dataProvider as? ClipboardRepository)?.swapData(sourceId, destinationId)
-
+        
         return true
     }
 }
