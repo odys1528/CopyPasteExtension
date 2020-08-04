@@ -83,3 +83,20 @@ extension SafeArray where T == DataModelProtocol? {
         array[secondIndex] = originalFirstItem
     }
 }
+
+extension SafeArray where T == DataModelProtocol? {
+    func isEqualTo(_ otherArray: SafeArray) -> Bool {
+        let difference = zip(array, otherArray.array).filter {
+            switch ($0, $1) {
+            case let (item1??, item2??):
+                return !(item1.id == item2.id && item1.data == item2.data)
+            case (nil, nil):
+                return false
+            default:
+                return true
+            }
+        }
+
+        return difference.isEmpty
+    }
+}

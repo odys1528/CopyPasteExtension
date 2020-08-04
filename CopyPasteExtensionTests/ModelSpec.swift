@@ -66,22 +66,6 @@ class ModelSpec: QuickSpec {
                     }
                 }
             }
-            
-            context("getting an item from array") {
-                let array = [0, 1, 2, 3]
-                
-                describe("item is returned") {
-                    it("index is in range") {
-                        expect(array.itemOrNil(index: array.count)).to(beNil())
-                    }
-                }
-                
-                describe("nil is returned") {
-                    it("index is out of range") {
-                        expect(array.itemOrNil(index: 1)).notTo(beNil())
-                    }
-                }
-            }
         }
         
         describe("the data repository") {
@@ -234,6 +218,40 @@ class ModelSpec: QuickSpec {
                             try dataProvider.swapData(1, AppPreferences.maxClipboardSize+1)
                         }.to(throwError())
                     }
+                }
+            }
+        }
+        
+        describe("the data collection") {
+            let array = [0, 1, nil, 3]
+            
+            context("init") {
+                it("with size") {
+                    let safeArray = SafeArray<Any>(arraySize: 3)
+                    expect(safeArray[0]).to(beNil())
+                    expect(safeArray[4]).notTo(throwError())
+                }
+                
+                it("with array") {
+                    let safeArray = SafeArray(array: array)
+                    expect(safeArray[0]).notTo(beNil())
+                    expect(safeArray[4]).notTo(throwError())
+                }
+            }
+            
+            context("set and get") {
+                let safeArray = SafeArray(array: array)
+                let data = 42
+                
+                it("in range") {
+                    safeArray[0] = data
+                    expect(safeArray[0]) == data
+                }
+                
+                it("out of range") {
+                    safeArray[42] = data
+                    expect(safeArray[42]).notTo(throwError())
+                    expect(safeArray[42]).to(beNil())
                 }
             }
         }

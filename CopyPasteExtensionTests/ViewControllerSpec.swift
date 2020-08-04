@@ -39,7 +39,7 @@ class ViewControllerSpec: QuickSpec {
             
             context("on data edit") {
                 var notification = Notification(name: Notification.Name("MockedNotification"))
-                let prevoiusData = [dataModel]
+                let prevoiusData: SafeArray<DataModelProtocol?> = SafeArray(array: [dataModel])
                 
                 let mockNSTableView = MockNSTableView()
                 let mockDefaults = MockUserDefaults()
@@ -47,7 +47,7 @@ class ViewControllerSpec: QuickSpec {
                 describe("no data") {
                     beforeEach {
                         notification = Notification(name: Notification.Name("MockedNotification"))
-                        viewController.data = [dataModel]
+                        viewController.data = SafeArray(array: [dataModel])
                         viewController.cache = [:]
                         viewController.dataTableView = mockNSTableView
                         mockDefaults.mockedStringReturn = { key in
@@ -60,11 +60,11 @@ class ViewControllerSpec: QuickSpec {
                     }
                     
                     it("no selection") {
-                         mockNSTableView.mockSelectedRow = -1
-                         notification.object = nil
+                        mockNSTableView.mockSelectedRow = -1
+                        notification.object = nil
                          
-                         viewController.controlTextDidEndEditing(notification)
-                         expect(viewController.data as? [DataModel]) == prevoiusData
+                        viewController.controlTextDidEndEditing(notification)
+                        expect(viewController.data.isEqualTo(prevoiusData)) == true
                      }
                     
                     it("new nil data") {
@@ -72,7 +72,7 @@ class ViewControllerSpec: QuickSpec {
                         notification.object = nil
                         
                         viewController.controlTextDidEndEditing(notification)
-                        expect(viewController.data as? [DataModel]) == prevoiusData
+                        expect(viewController.data.isEqualTo(prevoiusData)) == true
                     }
                     
                     it("new empty data") {
@@ -83,7 +83,7 @@ class ViewControllerSpec: QuickSpec {
                         notification.object = textField
                         
                         viewController.controlTextDidEndEditing(notification)
-                        expect(viewController.data as? [DataModel]) == prevoiusData
+                        expect(viewController.data.isEqualTo(prevoiusData)) == true
                     }
                     
                     it("cached data") {
@@ -98,7 +98,7 @@ class ViewControllerSpec: QuickSpec {
                         notification.object = textField
                         
                         viewController.controlTextDidEndEditing(notification)
-                        expect(viewController.data as? [DataModel]) == prevoiusData
+                        expect(viewController.data.isEqualTo(prevoiusData)) == true
                         expect(viewController.cache[0]) == "nana"
                     }
                     
@@ -110,7 +110,7 @@ class ViewControllerSpec: QuickSpec {
                 
                 describe("non empty data") {
                     beforeEach {
-                        viewController.data = [dataModel]
+                        viewController.data = SafeArray(array: [dataModel])
                         mockNSTableView.mockSelectedRow = 0
                         viewController.dataTableView = mockNSTableView
                         viewController.dataProvider = ClipboardRepository(defaults: mockDefaults)
@@ -142,7 +142,7 @@ class ViewControllerSpec: QuickSpec {
                         notification.object = textField
 
                         viewController.controlTextDidEndEditing(notification)
-                        expect(viewController.data[0]?.data) == newData
+                        expect(viewController.data[0]??.data) == newData
                     }
 
                     it("trim data") {
@@ -160,7 +160,7 @@ class ViewControllerSpec: QuickSpec {
 
                         viewController.controlTextDidEndEditing(notification)
 
-                        let dataSaved = viewController.data[0]?.data
+                        let dataSaved = viewController.data[0]??.data
                         expect(dataSaved) !== newData
                         expect(dataSaved?.count) == AppPreferences.maxDataSize
                     }
@@ -174,7 +174,7 @@ class ViewControllerSpec: QuickSpec {
                 let dataProvider = ClipboardRepository(defaults: mockDefaults)
 
                 beforeEach {
-                    viewController.data = [dataModel]
+                    viewController.data = SafeArray(array: [dataModel])
                     viewController.dataTableView = mockNSTableView
                     viewController.dataProvider = dataProvider
                 }
