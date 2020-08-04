@@ -48,12 +48,6 @@ extension Int {
     }
 }
 
-extension Array {
-    func itemOrNil(index: Int) -> Element? {
-        return index < self.count ? self[index] : nil
-    }
-}
-
 extension FileManager {
     static var applicationSupportDirectory: String {
         return NSSearchPathForDirectoriesInDomains(.applicationSupportDirectory, .userDomainMask, true)[0] as String

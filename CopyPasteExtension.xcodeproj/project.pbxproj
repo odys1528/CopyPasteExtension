@@ -11,6 +11,8 @@
 		9574256EB4831F7897F366BD /* Pods_CopyPasteExtensionTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECE0561DBD4AEA7BEAB7DB1F /* Pods_CopyPasteExtensionTests.framework */; };
 		F2047FFF24B0DD78000381D7 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2047FFE24B0DD78000381D7 /* DataModel.swift */; };
 		F23A626B24CC5AC600BA73AA /* AppConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = F23A626A24CC5AC600BA73AA /* AppConfig.swift */; };
+		F24BE86E24D8A77C00318E91 /* SafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24BE86D24D8A77C00318E91 /* SafeArray.swift */; };
+		F24BE86F24D8B9E200318E91 /* SafeArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = F24BE86D24D8A77C00318E91 /* SafeArray.swift */; };
 		F27F97F724C4C382001F904A /* MockNSTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27F97F624C4C382001F904A /* MockNSTableView.swift */; };
 		F27F97F924C4C544001F904A /* MockNSEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = F27F97F824C4C544001F904A /* MockNSEvent.swift */; };
 		F27F97FA24C4C7E1001F904A /* CellIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2D0B58124BF7A750044A1A2 /* CellIdentifier.swift */; };
@@ -82,6 +84,7 @@
 		ECE0561DBD4AEA7BEAB7DB1F /* Pods_CopyPasteExtensionTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CopyPasteExtensionTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F2047FFE24B0DD78000381D7 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		F23A626A24CC5AC600BA73AA /* AppConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfig.swift; sourceTree = "<group>"; };
+		F24BE86D24D8A77C00318E91 /* SafeArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeArray.swift; sourceTree = "<group>"; };
 		F27F97F624C4C382001F904A /* MockNSTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNSTableView.swift; sourceTree = "<group>"; };
 		F27F97F824C4C544001F904A /* MockNSEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockNSEvent.swift; sourceTree = "<group>"; };
 		F284B7EA24B8DBA80014B7FA /* MenuProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuProvider.swift; sourceTree = "<group>"; };
@@ -194,6 +197,7 @@
 				F2047FFE24B0DD78000381D7 /* DataModel.swift */,
 				F2B805C424C7513E00E192F5 /* DataRepositoryProtocol.swift */,
 				F2B805C724C7549A00E192F5 /* DataModelProtocol.swift */,
+				F24BE86D24D8A77C00318E91 /* SafeArray.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -424,6 +428,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F24BE86E24D8A77C00318E91 /* SafeArray.swift in Sources */,
 				F2047FFF24B0DD78000381D7 /* DataModel.swift in Sources */,
 				F2FCAE1824CF5017004C43B7 /* ObjectEncoderProtocol.swift in Sources */,
 				F2B805C524C7513E00E192F5 /* DataRepositoryProtocol.swift in Sources */,
@@ -461,6 +466,7 @@
 				F2FFC13124C5F5A2006D19DE /* MockStatusProtocol.swift in Sources */,
 				F2AE232B24C2169400B3B698 /* MockEventListener.swift in Sources */,
 				F2B805C624C7533600E192F5 /* DataRepositoryProtocol.swift in Sources */,
+				F24BE86F24D8B9E200318E91 /* SafeArray.swift in Sources */,
 				F27F97FA24C4C7E1001F904A /* CellIdentifier.swift in Sources */,
 				F2FCAE1A24CF51D3004C43B7 /* ObjectEncoderProtocol.swift in Sources */,
 				F2B805C924C7599F00E192F5 /* DataModelProtocol.swift in Sources */,

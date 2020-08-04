@@ -58,7 +58,8 @@ extension AppConfig: AppConfigProtocol {
             return configObject
         }
         
-        guard let configData = try? Data(contentsOf: pathURL),
+        guard
+            let configData = try? Data(contentsOf: pathURL),
             let configObject = try? AppConfig.decodeObject(from: configData) as? AppConfigProtocol
             else {
             return AppConfig.defaultConfig

@@ -11,7 +11,7 @@ import Carbon
 
 class ClipboardViewController: NSViewController {
     @IBOutlet weak var dataTableView: NSTableView!
-    var data: [DataModelProtocol] = []
+    var data: SafeArray<DataModelProtocol?> = SafeArray(arraySize: AppPreferences.getMaxClipboardSize)
     var cache: [Int: String] = [:]
     
     internal var dataProvider: DataRepositoryProtocol? = nil
@@ -56,7 +56,7 @@ extension ClipboardViewController: NSTableViewDelegate {
             return nil
         }
         
-        let dataModel = data.itemOrNil(index: row)
+        let dataModel = data[row]
 
         if tableColumn?.identifier == TableIdentifier.dataColumn.itemIdentifier {
             guard let cellView = tableView.makeView(withIdentifier: TableIdentifier.dataCell.itemIdentifier, owner: self) as? NSTableCellView else {
@@ -64,8 +64,7 @@ extension ClipboardViewController: NSTableViewDelegate {
             }
             
             cellView.textField?.delegate = self
-            cellView.objectValue = dataModel
-            if let data = dataModel?.data {
+            if let data = dataModel??.data {
                 cellView.textField?.stringValue = data
             }
             
@@ -82,17 +81,64 @@ extension ClipboardViewController: NSTableViewDataSource {
         refreshData()
         dataTableView.delegate = self
         dataTableView.dataSource = self
+        
+        dataTableView.registerForDraggedTypes([.dataModelPasteboardType])
     }
     
     private func refreshData() {
         guard let allData = try? dataProvider?.allData() else {
             return
         }
-        data = allData
+        data = SafeArray(array: allData)
     }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         return AppPreferences.getMaxClipboardSize
+    }
+    
+    func tableView(_ tableView: NSTableView, pasteboardWriterForRow row: Int) -> NSPasteboardWriting? {
+        guard
+            let dataModel = data[row],
+            let id = dataModel?.id
+            else {
+            return nil
+        }
+        
+        let pasteboardItem = NSPasteboardItem()
+        pasteboardItem.setString("\(id)", forType: .dataModelPasteboardType)
+        return pasteboardItem
+    }
+    
+    func tableView(_ tableView: NSTableView, validateDrop info: NSDraggingInfo, proposedRow row: Int, proposedDropOperation dropOperation: NSTableView.DropOperation) -> NSDragOperation {
+        return dropOperation == .above ? .move : []
+    }
+    
+    func tableView(_ tableView: NSTableView, acceptDrop info: NSDraggingInfo, row: Int, dropOperation: NSTableView.DropOperation) -> Bool {
+        guard
+            let item = info.draggingPasteboard.pasteboardItems?.first,
+            let id = item.string(forType: .dataModelPasteboardType),
+            let originalDataModel = data.first(where: { $0??.id == Int(id) }),
+            let originalRow = data.firstIndex(where: { $0??.id == originalDataModel??.id })
+            else {
+                return false
+        }
+
+        let newRow = originalRow < row ? row - 1 : row
+
+        guard
+            let sourceId = originalDataModel??.id,
+            let destinationId = data[newRow]??.id
+            else {
+            return false
+        }
+        
+        tableView.update {
+            tableView.moveRow(at: originalRow, to: newRow)
+        }
+        data.swap(originalRow, newRow)
+        try? (dataProvider as? ClipboardRepository)?.swapData(sourceId, destinationId)
+        
+        return true
     }
 }
 
@@ -100,7 +146,10 @@ extension ClipboardViewController: NSTableViewDataSource {
 extension ClipboardViewController: NSTextFieldDelegate {
     func controlTextDidBeginEditing(_ obj: Notification) {
         let selectedRow = dataTableView.selectedRow
-        guard let data = (obj.object as? NSTextField)?.stringValue, selectedRow >= 0 else {
+        guard
+            let data = (obj.object as? NSTextField)?.stringValue,
+            selectedRow >= 0
+            else {
             return
         }
         
@@ -109,8 +158,10 @@ extension ClipboardViewController: NSTextFieldDelegate {
     
     func controlTextDidEndEditing(_ notification: Notification) {
         let selectedRow = dataTableView.selectedRow
-        guard selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
-            let newData = (notification.object as? NSTextField)?.stringValue else {
+        guard
+            selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
+            let newData = (notification.object as? NSTextField)?.stringValue
+            else {
             return
         }
         
@@ -118,7 +169,7 @@ extension ClipboardViewController: NSTextFieldDelegate {
         let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
         cellView?.setText(data)
         
-        guard let dataModel = cellView?.objectValue as? DataModel else {
+        guard let dataModel = self.data[selectedRow] as? DataModel else {
             guard newData.count > 0 else {
                 cellView?.setText(cache[selectedRow])
                 return
@@ -129,8 +180,7 @@ extension ClipboardViewController: NSTextFieldDelegate {
             }
             
             let newDataModel = DataModel(id: itemId, data: data)
-            cellView?.setObject(newDataModel)
-            self.data.append(newDataModel)
+            self.data[selectedRow] = newDataModel
             
             return
         }
@@ -141,14 +191,15 @@ extension ClipboardViewController: NSTextFieldDelegate {
         }
         
         let updatedDataModel = DataModel(id: dataModel.id, data: data)
-        cellView?.setObject(updatedDataModel)
+        self.data[selectedRow] = updatedDataModel
+        
         guard let _ = try? dataProvider?.setData(item: updatedDataModel) else {
             cellView?.setText(cache[selectedRow])
             return
         }
         
         let index = self.data.firstIndex {
-            $0.id == updatedDataModel.id
+            $0??.id == updatedDataModel.id
         }
         guard let validIndex = index else {
             return
@@ -163,9 +214,10 @@ extension ClipboardViewController {
         let selectedRow = dataTableView.selectedRow
         let cellView = dataTableView.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: selectedRow))
         
-        guard event.keyCode == kVK_Delete,
+        guard
+            event.keyCode == kVK_Delete,
             selectedRow.inRange(from: 0, to: AppPreferences.getMaxClipboardSize),
-            let dataModel = cellView?.objectValue as? DataModel
+            let dataModel = data[selectedRow] as? DataModel
             else {
             return
         }
@@ -174,14 +226,14 @@ extension ClipboardViewController {
             return
         }
         
-        data = data.filter {
-            $0.id != dataModel.id
+        data.filtered {
+            $0??.id != dataModel.id
         }
         cache[selectedRow] = nil
         
         dataTableView.update {
             cellView?.setText("")
-            cellView?.setObject(nil)
+            data[selectedRow] = nil
             dataTableView.recycleRow()
         }
     }
@@ -211,8 +263,11 @@ private extension NSTableView {
     private var nearestFreeRowId: Int {
         for index in selectedRow+1...numberOfRows-1 {
             let cellView = self.cellView(cellIdentifier: CellIdentifier(identifier: TableIdentifier.dataCell, row: index))
-            let objectValue = cellView?.objectValue as? DataModel
-            guard objectValue != nil else {
+            
+            guard
+                let objectValue = cellView?.textField?.stringValue,
+                !objectValue.isEmpty
+                else {
                 return index
             }
         }
@@ -228,8 +283,9 @@ private extension NSTableCellView {
         }
         self.textField?.stringValue = text
     }
-    
-    func setObject(_ object: Any?) {
-        self.objectValue = object
-    }
+}
+
+//MARK:-NSPasteboard.PasteboardType extension
+private extension NSPasteboard.PasteboardType {
+    static let dataModelPasteboardType = NSPasteboard.PasteboardType(rawValue: "com.odys1528.CopyPasteExtension.tableViewIndex")
 }

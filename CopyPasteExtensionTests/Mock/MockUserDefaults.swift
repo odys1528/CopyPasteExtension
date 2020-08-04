@@ -12,14 +12,14 @@ class MockUserDefaults: UserDefaults {
     typealias MockedStringReturn = (String) -> String?
     var mockedStringReturn: MockedStringReturn? = nil
     private var status = MockStatus.unknown
-    var dataSaved: [String: Any?] = [:]
+    var dataSaved: [String: String?] = [:]
     
     override func string(forKey defaultName: String) -> String? {
         return mockedStringReturn?(defaultName)
     }
     
     override func setValue(_ value: Any?, forKey key: String) {
-        dataSaved[key] = value
+        dataSaved[key] = value as? String?
     }
     
     override func removeObject(forKey defaultName: String) {

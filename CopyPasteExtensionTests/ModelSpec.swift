@@ -66,22 +66,6 @@ class ModelSpec: QuickSpec {
                     }
                 }
             }
-            
-            context("getting an item from array") {
-                let array = [0, 1, 2, 3]
-                
-                describe("item is returned") {
-                    it("index is in range") {
-                        expect(array.itemOrNil(index: array.count)).to(beNil())
-                    }
-                }
-                
-                describe("nil is returned") {
-                    it("index is out of range") {
-                        expect(array.itemOrNil(index: 1)).notTo(beNil())
-                    }
-                }
-            }
         }
         
         describe("the data repository") {
@@ -184,6 +168,90 @@ class ModelSpec: QuickSpec {
                             try dataProvider.removeData(withId: AppPreferences.maxClipboardSize+1)
                         }.to(throwError())
                     }
+                }
+                
+                describe("swap data") {
+                    let mockDataModelArray = [
+                        DataModel(id: 1, data: "a"),
+                        DataModel(id: 2, data: "b"),
+                    ]
+                    
+                    beforeEach {
+                        mockDefaults.mockedStringReturn = { key in
+                            var resultData: String? = nil
+                            mockDataModelArray.forEach { mockDataModel in
+                                if key == ClipboardRepository.dataId(withId: mockDataModel.id) {
+                                    resultData = mockDataModel.data
+                                }
+                            }
+                            return resultData
+                        }
+                    }
+                    
+                    it("with correct id") {
+                        expect {
+                            try dataProvider.swapData(1, 2)
+                        }.notTo(throwError())
+                        
+                        let dataSaved = mockDefaults.dataSaved
+                        let mockDataModel1 = mockDataModelArray[0]
+                        let mockDataModel2 = mockDataModelArray[1]
+                        let key1 = ClipboardRepository.dataId(withId: mockDataModel1.id)
+                        let key2 = ClipboardRepository.dataId(withId: mockDataModel2.id)
+                        expect(mockDataModel1.data) == dataSaved[key2]
+                        expect(mockDataModel2.data) == dataSaved[key1]
+                    }
+                    
+                    it("with the same id") {
+                        expect {
+                            try dataProvider.swapData(1, 1)
+                        }.notTo(throwError())
+                        
+                        let dataSaved = mockDefaults.dataSaved
+                        let mockDataModel1 = mockDataModelArray[0]
+                        let key1 = ClipboardRepository.dataId(withId: mockDataModel1.id)
+                        expect(mockDataModel1.data) == dataSaved[key1]
+                    }
+                    
+                    it("with incorrect id") {
+                        expect {
+                            try dataProvider.swapData(1, AppPreferences.maxClipboardSize+1)
+                        }.to(throwError())
+                    }
+                }
+            }
+        }
+        
+        describe("the data collection") {
+            let array = [0, 1, nil, 3]
+            
+            context("init") {
+                it("with size") {
+                    let safeArray = SafeArray<Any>(arraySize: 3)
+                    expect(safeArray[0]).to(beNil())
+                    expect(safeArray[4]).notTo(throwError())
+                }
+                
+                it("with array") {
+                    let safeArray = SafeArray(array: array)
+                    expect(safeArray[0]).notTo(beNil())
+                    expect(safeArray[4]).notTo(throwError())
+                }
+            }
+            
+            context("set and get") {
+                let safeArray = SafeArray(array: array)
+                let data = 42
+                
+                it("in range") {
+                    safeArray[0] = data
+                    expect(safeArray[0]) == data
+                }
+                
+                it("out of range") {
+                    safeArray[42] = data
+                    expect(safeArray[42]).notTo(throwError())
+                    expect(safeArray[42]).to(beNil())
                 }
             }
         }
